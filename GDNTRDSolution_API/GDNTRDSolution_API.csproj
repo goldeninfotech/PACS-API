@@ -1,0 +1,27 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="6.0.16" />
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="6.5.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Areas\" />
+    <Folder Include="Areas\ADM\Controllers\" />
+    <Folder Include="Areas\ADM\Data\" />
+    <Folder Include="Areas\ADM\Models\" />
+    <Folder Include="Areas\ADM\Views\" />
+    <Folder Include="Areas\TRD\Controllers\" />
+    <Folder Include="Areas\TRD\Data\" />
+    <Folder Include="Areas\TRD\Models\" />
+    <Folder Include="Areas\TRD\Views\" />
+    <Folder Include="Models\" />
+  </ItemGroup>
+
+</Project>
