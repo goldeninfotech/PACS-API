@@ -9976,11 +9976,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\Dev Software2\\Medical Software\\WebAPISoftware\\GDNTRDSolution_API\\GDNTRDSolution_API.csproj",
+      "projectUniqueName": "D:\\Dev Software2\\Medical Software\\WebAPISoftware\\WebAPISoftware\\GDNTRDSolution_API\\GDNTRDSolution_API.csproj",
       "projectName": "GDNTRDSolution_API",
-      "projectPath": "D:\\Dev Software2\\Medical Software\\WebAPISoftware\\GDNTRDSolution_API\\GDNTRDSolution_API.csproj",
+      "projectPath": "D:\\Dev Software2\\Medical Software\\WebAPISoftware\\WebAPISoftware\\GDNTRDSolution_API\\GDNTRDSolution_API.csproj",
       "packagesPath": "C:\\Users\\royhr\\.nuget\\packages\\",
-      "outputPath": "D:\\Dev Software2\\Medical Software\\WebAPISoftware\\GDNTRDSolution_API\\obj\\",
+      "outputPath": "D:\\Dev Software2\\Medical Software\\WebAPISoftware\\WebAPISoftware\\GDNTRDSolution_API\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"

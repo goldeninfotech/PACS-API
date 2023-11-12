@@ -14,11 +14,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\Dev Software2\\Medical Software\\WebAPISoftware\\SoftEngine.Interface\\SoftEngine.Interface.csproj",
+      "projectUniqueName": "D:\\Dev Software2\\Medical Software\\WebAPISoftware\\WebAPISoftware\\SoftEngine.Interface\\SoftEngine.Interface.csproj",
       "projectName": "SoftEngine.Interface",
-      "projectPath": "D:\\Dev Software2\\Medical Software\\WebAPISoftware\\SoftEngine.Interface\\SoftEngine.Interface.csproj",
+      "projectPath": "D:\\Dev Software2\\Medical Software\\WebAPISoftware\\WebAPISoftware\\SoftEngine.Interface\\SoftEngine.Interface.csproj",
       "packagesPath": "C:\\Users\\royhr\\.nuget\\packages\\",
-      "outputPath": "D:\\Dev Software2\\Medical Software\\WebAPISoftware\\SoftEngine.Interface\\obj\\",
+      "outputPath": "D:\\Dev Software2\\Medical Software\\WebAPISoftware\\WebAPISoftware\\SoftEngine.Interface\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"

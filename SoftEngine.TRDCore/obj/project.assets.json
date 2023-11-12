@@ -14,11 +14,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\Dev Software2\\Medical Software\\WebAPISoftware\\SoftEngine.TRDCore\\SoftEngine.TRDCore.csproj",
+      "projectUniqueName": "D:\\Dev Software2\\Medical Software\\WebAPISoftware\\WebAPISoftware\\SoftEngine.TRDCore\\SoftEngine.TRDCore.csproj",
       "projectName": "SoftEngine.TRDCore",
-      "projectPath": "D:\\Dev Software2\\Medical Software\\WebAPISoftware\\SoftEngine.TRDCore\\SoftEngine.TRDCore.csproj",
+      "projectPath": "D:\\Dev Software2\\Medical Software\\WebAPISoftware\\WebAPISoftware\\SoftEngine.TRDCore\\SoftEngine.TRDCore.csproj",
       "packagesPath": "C:\\Users\\royhr\\.nuget\\packages\\",
-      "outputPath": "D:\\Dev Software2\\Medical Software\\WebAPISoftware\\SoftEngine.TRDCore\\obj\\",
+      "outputPath": "D:\\Dev Software2\\Medical Software\\WebAPISoftware\\WebAPISoftware\\SoftEngine.TRDCore\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"

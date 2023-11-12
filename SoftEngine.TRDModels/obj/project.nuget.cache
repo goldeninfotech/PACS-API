@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "zHAylIpErOkZq2NolG/yPFndxzh/eHGBEELSLPlYXtJFmyz36tVFFOU8Aeji2QgXE5ITBgIGyhg+AEItWk+W9Q==",
+  "dgSpecHash": "ux2eoUCVlBA6oZ6IveO14oAN4XPTi3HjNbBEE7JxusovznTkeXcw826IC39sJTdulUG/jVoaeTt1FXm3HX+W8Q==",
   "success": true,
-  "projectFilePath": "D:\\Dev Software2\\Medical Software\\WebAPISoftware\\SoftEngine.TRDModels\\SoftEngine.TRDModels.csproj",
+  "projectFilePath": "D:\\Dev Software2\\Medical Software\\WebAPISoftware\\WebAPISoftware\\SoftEngine.TRDModels\\SoftEngine.TRDModels.csproj",
   "expectedPackageFiles": [],
   "logs": []
 }
