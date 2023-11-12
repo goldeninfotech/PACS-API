@@ -21,7 +21,6 @@
     <Folder Include="Areas\TRD\Data\" />
     <Folder Include="Areas\TRD\Models\" />
     <Folder Include="Areas\TRD\Views\" />
-    <Folder Include="Models\" />
   </ItemGroup>
 
 </Project>
