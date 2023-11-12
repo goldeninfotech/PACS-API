@@ -9,3 +9,9 @@ D:\Dev Software2\Medical Software\WebAPISoftware\WebAPISoftware\SoftEngine.TRDCo
 D:\Dev Software2\Medical Software\WebAPISoftware\WebAPISoftware\SoftEngine.TRDCore\obj\Debug\net6.0\refint\SoftEngine.TRDCore.dll
 D:\Dev Software2\Medical Software\WebAPISoftware\WebAPISoftware\SoftEngine.TRDCore\obj\Debug\net6.0\SoftEngine.TRDCore.pdb
 D:\Dev Software2\Medical Software\WebAPISoftware\WebAPISoftware\SoftEngine.TRDCore\obj\Debug\net6.0\ref\SoftEngine.TRDCore.dll
+D:\Dev Software2\Medical Software\WebAPISoftware\WebAPISoftware\SoftEngine.TRDCore\bin\Debug\net6.0\SoftEngine.Interface.dll
+D:\Dev Software2\Medical Software\WebAPISoftware\WebAPISoftware\SoftEngine.TRDCore\bin\Debug\net6.0\SoftEngine.Interface.pdb
+D:\Dev Software2\Medical Software\WebAPISoftware\WebAPISoftware\SoftEngine.TRDCore\obj\Debug\net6.0\SoftEngine.TRDCore.csproj.AssemblyReference.cache
+D:\Dev Software2\Medical Software\WebAPISoftware\WebAPISoftware\SoftEngine.TRDCore\obj\Debug\net6.0\SoftEngine.TRDCore.csproj.CopyComplete
+D:\Dev Software2\Medical Software\WebAPISoftware\WebAPISoftware\SoftEngine.TRDCore\bin\Debug\net6.0\SoftEngine.TRDModels.dll
+D:\Dev Software2\Medical Software\WebAPISoftware\WebAPISoftware\SoftEngine.TRDCore\bin\Debug\net6.0\SoftEngine.TRDModels.pdb

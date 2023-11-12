@@ -4,16 +4,16 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SoftEngine.TRDModels.ADM
+namespace SoftEngine.TRDModels.Models.ADM
 {
-    public class ADM_UserPermission
+    public class ADM_RolePermission
     {
-        public int PermissionId
+        public int RolePermissionId
         {
             get;
             set;
         }
-        public int UserCode
+        public int RoleId
         {
             get;
             set;

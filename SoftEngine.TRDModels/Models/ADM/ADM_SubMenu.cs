@@ -4,16 +4,26 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SoftEngine.TRDModels.ADM
+namespace SoftEngine.TRDModels.Models.ADM
 {
-    public class ADM_Menu
+    public class ADM_SubMenu
     {
+        public int SubMenuId
+        {
+            get;
+            set;
+        }
+        public string? SubMenuName
+        {
+            get;
+            set;
+        }
         public int MenuId
         {
             get;
             set;
         }
-        public string? MenuName
+        public string? ActionLink
         {
             get;
             set;
@@ -49,5 +59,6 @@ namespace SoftEngine.TRDModels.ADM
             set;
         }
 
+        public string? MenuName { get; set; }
     }
 }

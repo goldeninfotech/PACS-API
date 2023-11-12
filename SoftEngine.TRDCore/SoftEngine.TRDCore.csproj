@@ -7,8 +7,11 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="ADM\" />
     <Folder Include="TRD\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\SoftEngine.Interface\SoftEngine.Interface.csproj" />
   </ItemGroup>
 
 </Project>

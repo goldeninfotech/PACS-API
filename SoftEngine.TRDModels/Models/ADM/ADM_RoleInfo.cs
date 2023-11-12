@@ -4,26 +4,16 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SoftEngine.TRDModels.ADM
+namespace SoftEngine.TRDModels.Models.ADM
 {
-    public class ADM_SubMenu
+    public class ADM_RoleInfo
     {
-        public int SubMenuId
+        public int RoleId
         {
             get;
             set;
         }
-        public string? SubMenuName
-        {
-            get;
-            set;
-        }
-        public int MenuId
-        {
-            get;
-            set;
-        }
-        public string? ActionLink
+        public string? RoleName
         {
             get;
             set;
@@ -53,12 +43,6 @@ namespace SoftEngine.TRDModels.ADM
             get;
             set;
         }
-        public string? PositionNumber
-        {
-            get;
-            set;
-        }
 
-        public string? MenuName { get; set; }
     }
 }

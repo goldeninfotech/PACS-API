@@ -4,16 +4,16 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SoftEngine.TRDModels.ADM
+namespace SoftEngine.TRDModels.Models.ADM
 {
-    public class ADM_RoleInfo
+    public class ADM_Menu
     {
-        public int RoleId
+        public int MenuId
         {
             get;
             set;
         }
-        public string? RoleName
+        public string? MenuName
         {
             get;
             set;
@@ -39,6 +39,11 @@ namespace SoftEngine.TRDModels.ADM
             set;
         }
         public string? UpdatedDate
+        {
+            get;
+            set;
+        }
+        public string? PositionNumber
         {
             get;
             set;

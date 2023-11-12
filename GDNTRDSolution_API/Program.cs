@@ -2,6 +2,8 @@
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
+using SoftEngine.Interface.IADM;
+using SoftEngine.TRDCore.ADM;
 using SoftEngine.TRDCore.Configurations;
 using System.Text;
 
@@ -41,6 +43,8 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+// Register the service implementation and interface
+builder.Services.AddScoped<IUserLogin, UserLoginBLL>();
 
 builder.Services.AddSwaggerGen(opt =>
 {
