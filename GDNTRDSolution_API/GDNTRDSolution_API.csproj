@@ -7,7 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Dapper" Version="2.1.21" />
+    <PackageReference Include="Dapper" Version="2.1.24" />
     <PackageReference Include="MailKit" Version="4.3.0" />
     <PackageReference Include="Microsoft.AspNet.WebApi" Version="5.3.0" />
     <PackageReference Include="Microsoft.AspNet.WebApi.Core" Version="5.3.0" />
@@ -20,12 +20,10 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Areas\" />
     <Folder Include="Areas\ADM\Controllers\" />
     <Folder Include="Areas\ADM\Data\" />
     <Folder Include="Areas\ADM\Models\" />
     <Folder Include="Areas\ADM\Views\" />
-    <Folder Include="Areas\TRD\Controllers\" />
     <Folder Include="Areas\TRD\Data\" />
     <Folder Include="Areas\TRD\Models\" />
     <Folder Include="Areas\TRD\Views\" />

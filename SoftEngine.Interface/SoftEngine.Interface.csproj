@@ -7,10 +7,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="ITRD\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\SoftEngine.TRDModels\SoftEngine.TRDModels.csproj" />
   </ItemGroup>
 
