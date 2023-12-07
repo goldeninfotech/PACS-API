@@ -81,6 +81,7 @@ builder.Services.AddScoped<IDepartment, DepartmentBLL>();
 builder.Services.AddScoped<IUsers, UsersBLL>();
 builder.Services.AddScoped<IRoleInfo, RoleInfoBLL>();
 builder.Services.AddScoped<IHospital, HospitalBLL>();
+builder.Services.AddScoped<IHospitalCategory, HospitalCategoryBLL>();
 
 var app = builder.Build();
 

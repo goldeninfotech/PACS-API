@@ -47,7 +47,7 @@ namespace SoftEngine.TRDCore.TRD
             var response = new DataBaseResponse();
             await using (var connection = new SqlConnection(_dbSettings.DefaultConnection))
             {
-                bool duplicateresult = GetDuplicateCOA1(model.Name, 0);
+                bool duplicateresult = GetDuplicateDepartment(model.Name, 0);
                 if (duplicateresult)
                 {
                     StringBuilder strSql = new StringBuilder();
@@ -91,7 +91,7 @@ namespace SoftEngine.TRDCore.TRD
             var response = new DataBaseResponse();
             await using (var connection = new SqlConnection(_dbSettings.DefaultConnection))
             {
-                bool duplicateresult = GetDuplicateCOA1(model.Name, model.Id);
+                bool duplicateresult = GetDuplicateDepartment(model.Name, model.Id);
                 if (duplicateresult)
                 {
                     StringBuilder strSql = new StringBuilder();
@@ -139,7 +139,7 @@ namespace SoftEngine.TRDCore.TRD
                 strSql.AppendLine(" UPDATE Departments SET Status=@Status WHERE Id=@Id");
                 try
                 {
-                    var result = connection.Execute(strSql.ToString(), new { Status = "0", Id = id, });
+                    var result = connection.Execute(strSql.ToString(), new { Status = 0, Id = id, });
                     response.ReturnValue = result;
                     response.Message = GlobalConst.DELETE_SUCCESS_MESSAGE;
                     response.IsSuccess = true;
@@ -154,7 +154,7 @@ namespace SoftEngine.TRDCore.TRD
             return response;
         }
 
-        public bool GetDuplicateCOA1(string name, int id)
+        public bool GetDuplicateDepartment(string name, int id)
         {
             using (var connection = new SqlConnection(_dbSettings.DefaultConnection))
             {

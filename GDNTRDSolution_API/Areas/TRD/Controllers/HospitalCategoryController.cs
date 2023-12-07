@@ -1,6 +1,5 @@
 ﻿using GDNTRDSolution_API.Common;
 using GDNTRDSolution_API.Models;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using SoftEngine.Interface.ITRD;
 using SoftEngine.TRDModels.Models.TRD;
@@ -9,28 +8,29 @@ namespace GDNTRDSolution_API.Areas.TRD.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
-    public class DepartmentController : Controller
+    public class HospitalCategoryController : Controller
     {
-        private readonly IDepartment _department ;
-        public DepartmentController(IDepartment department)
+        private readonly IHospitalCategory _hospitalCategory;
+
+        public HospitalCategoryController(IHospitalCategory hospitalCategory)
         {
-            _department = department;
+            _hospitalCategory = hospitalCategory;
         }
 
-        #region Department CRUD
+        #region HospitalCategory CRUD
         [HttpGet]
-        [Route("GetDepartmentList")]
-        public IActionResult GetDepartmentList(int pageNumber = 1, int limit = 10)
+        [Route("GetHospitalCategoryList")]
+        public IActionResult GetHospitalCategoryList(int pageNumber = 1, int limit = 10)
         {
-            var data = _department.GetDepartmentList();
-            IEnumerable<Departments> paginatedData;
+            var data = _hospitalCategory.GetHospitalCategoryList();
+            IEnumerable<HospitalCategory> paginatedData;
             if (limit == 0)
                 paginatedData = data.Skip(pageNumber - 1);
             else
                 paginatedData = data.Skip((pageNumber - 1) * limit).Take(limit);
 
             var response = ReturnData.ReturnDataList(data);
-            var result = new ListMetaData<Departments>
+            var result = new ListMetaData<HospitalCategory>
             {
                 TotalData = data.Count(),
                 DataFound = paginatedData.Count(),
@@ -43,25 +43,25 @@ namespace GDNTRDSolution_API.Areas.TRD.Controllers
         }
 
         [HttpGet]
-        [Route("GetDepartmentById")]
-        public IActionResult GetDepartmentById(int id)
+        [Route("GetHospitalCategoryById")]
+        public IActionResult GetHospitalCategoryById(int id)
         {
-            var data = _department.GetDepartmentById(id);
+            var data = _hospitalCategory.GetHospitalCategoryById(id);
             var response = ReturnData.ReturnDataListById(data);
             return Ok(new { IsSuccess = response.IsSuccess, Message = response.Message, resultData = data });
         }
 
 
         [HttpPost]
-        [Route("SaveDepartmentInfo")]
-        public async Task<IActionResult> SaveDepartmentInfo(Departments model ) 
+        [Route("SaveHospitalCategoryInfo")]
+        public async Task<IActionResult> SaveHospitalCategoryInfo(HospitalCategory model)
         {
-            if (ModelState.IsValid)
+            if (ModelState.IsValid && !string.IsNullOrEmpty(model.Name))
             {
                 model.Status = 1;
                 model.AddedBy = "";
                 model.AddedDate = DateTime.Now.ToString("dd-mm-yyyy");
-                var data = await _department.SaveDepartmentInfo(model);
+                var data = await _hospitalCategory.SaveHospitalCategoryInfo(model);
                 return Ok(data);
             }
             else
@@ -69,14 +69,14 @@ namespace GDNTRDSolution_API.Areas.TRD.Controllers
         }
 
         [HttpPut]
-        [Route("UpdateDepartmentInfo")]
-        public async Task<IActionResult> UpdateDepartmentInfo(Departments model, int subMenuId, string type)
+        [Route("UpdateHospitalCategoryInfo")]
+        public async Task<IActionResult> UpdateHospitalCategoryInfo(HospitalCategory model)
         {
             if (model.Id > 0)
             {
                 model.UpdatedDate = DateTime.Now.ToString("dd-mm-yyyy");
-                model.UpdatedBy ="";
-                var data = await _department.UpdateDepartmentInfo(model);
+                model.UpdatedBy = "";
+                var data = await _hospitalCategory.UpdateHospitalCategoryInfo(model);
                 return Ok(data);
             }
             else
@@ -84,19 +84,17 @@ namespace GDNTRDSolution_API.Areas.TRD.Controllers
         }
 
         [HttpDelete]
-        [Route("DeleteDepartmentInfo")]
-        public async Task<IActionResult> DeleteDepartmentInfo(int id)
+        [Route("DeleteHospitalCategoryInfo")]
+        public async Task<IActionResult> DeleteHospitalCategoryInfo(int id)
         {
             if (id > 0)
             {
-                var data = await _department.DeleteDepartmentInfo(id);
+                var data = await _hospitalCategory.DeleteHospitalCategoryInfo(id);
                 return Ok(data);
             }
             else
                 return BadRequest();
         }
-
-
         #endregion
     }
 }

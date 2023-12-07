@@ -12,60 +12,53 @@ using System.Threading.Tasks;
 
 namespace SoftEngine.TRDCore.TRD
 {
-    public class HospitalBLL : IHospital
+    public class HospitalCategoryBLL : IHospitalCategory
     {
         private readonly ConnectionStrings _dbSettings;
-        public HospitalBLL(ConnectionStrings dbSettings)
+        public HospitalCategoryBLL(ConnectionStrings dbSettings) 
         {
             _dbSettings = dbSettings;
         }
-        #region Hospital CRUD
-        public IEnumerable<Hospital> GetHospitalList()
+        public IEnumerable<HospitalCategory> GetHospitalCategoryList()
         {
             using (var connection = new SqlConnection(_dbSettings.DefaultConnection))
             {
-                var sql = @"Select Id,User_Id,Name,Description,Email,HospitalCategory_Id,Country,City,Full_Address,Phone,Status from Hospital where Status=1";
-                var models = connection.Query<Hospital>(sql).ToList();
+                var sql = @"Select Id,Name,Description,Status from HospitalCategory where Status=1";
+                var models = connection.Query<HospitalCategory>(sql).ToList();
                 return models;
             }
         }
-        public Hospital GetHospitalById(int id)
+        public HospitalCategory GetHospitalCategoryById(int id)
         {
             using (var connection = new SqlConnection(_dbSettings.DefaultConnection))
             {
                 StringBuilder strSql = new StringBuilder();
-                strSql.AppendLine(" Select Id,User_Id,Name,Description,Email,HospitalCategory_Id,Country,City,Full_Address,Phone,Image,Status from Hospital where Status=1 ");
+                strSql.AppendLine(" Select Id,Name,Description,Status from HospitalCategory where Status=1 ");
                 strSql.AppendLine(" and Id=@Id ");
-                var models = connection.Query<Hospital>(strSql.ToString(), new { Id = id, }).FirstOrDefault();
-                return models; 
+                var models = connection.Query<HospitalCategory>(strSql.ToString(), new { Id = id, }).FirstOrDefault();
+                return models;
             }
         }
-        public async Task<DataBaseResponse> SaveHospitalInfo(Hospital model)
+
+        public async Task<DataBaseResponse> SaveHospitalCategoryInfo(HospitalCategory model)
         {
             var response = new DataBaseResponse();
             await using (var connection = new SqlConnection(_dbSettings.DefaultConnection))
             {
-                bool duplicateresult = GetDuplicateHospital(model.Name, 0);
+                bool duplicateresult = GetDuplicateHospitalCategory(model.Name, 0);
                 if (duplicateresult)
                 {
                     StringBuilder strSql = new StringBuilder();
-                    strSql.AppendLine(" INSERT INTO  Hospital");
-                    strSql.AppendLine(" ( User_Id,Name,Description,Email,HospitalCategory_Id,Country,City,Full_Address,Phone,Status,AddedBy,AddedDate) VALUES ");
-                    strSql.AppendLine(" ( @User_Id,@Name,@Description,@Email,@HospitalCategory_Id,@Country,@City,@Full_Address,@Phone,@Status,@AddedBy,@AddedDate);");
+                    strSql.AppendLine(" INSERT INTO  HospitalCategory");
+                    strSql.AppendLine(" ( Name,Description,Status,AddedBy,AddedDate) VALUES ");
+                    strSql.AppendLine(" ( @Name,@Description,@Status,@AddedBy,@AddedDate);");
                     try
                     {
                         var Saveresult = connection.Execute(strSql.ToString(),
                                         new
                                         {
-                                            User_Id = model.User_Id,
                                             Name = model.Name,
                                             Description = model.Description,
-                                            Email = model.Email,
-                                            HospitalCategory_Id = model.HospitalCategory_Id,
-                                            Country = model.Country,
-                                            City = model.City,
-                                            Full_Address = model.Full_Address,
-                                            Phone = model.Phone,
                                             Status = model.Status,
                                             AddedBy = model.AddedBy,
                                             AddedDate = model.AddedDate,
@@ -92,33 +85,26 @@ namespace SoftEngine.TRDCore.TRD
             return response;
         }
 
-        public async Task<DataBaseResponse> UpdateHospitalInfo(Hospital model)
+        public async Task<DataBaseResponse> UpdateHospitalCategoryInfo(HospitalCategory model)
         {
             var response = new DataBaseResponse();
             await using (var connection = new SqlConnection(_dbSettings.DefaultConnection))
             {
-                bool duplicateresult = GetDuplicateHospital(model.Name, model.Id);
+                bool duplicateresult = GetDuplicateHospitalCategory(model.Name, model.Id);
                 if (duplicateresult)
                 {
                     StringBuilder strSql = new StringBuilder();
-                    strSql.AppendLine(" UPDATE  Hospital SET ");
-                    strSql.AppendLine(" User_Id=@User_Id,Name=@Name,Description=@Description,Email=@Email,HospitalCategory_Id=@HospitalCategory_Id,Country=@Country,City=@City, ");
-                    strSql.AppendLine(" Full_Address=@Full_Address,Phone=@Phone,Status=@Status, UpdatedBy=@UpdatedBy,UpdatedDate=@UpdatedDate Where Id=@Id ");
+                    strSql.AppendLine(" UPDATE  HospitalCategory SET ");
+                    strSql.AppendLine(" Name=@Name,Description=@Description,Status=@Status, UpdatedBy=@UpdatedBy,UpdatedDate=@UpdatedDate ");
+                    strSql.AppendLine(" Where Id=@Id;");
                     try
                     {
                         var Saveresult = connection.Execute(strSql.ToString(),
                                         new
                                         {
                                             Id = model.Id,
-                                            User_Id = model.User_Id,
                                             Name = model.Name,
                                             Description = model.Description,
-                                            Email = model.Email,
-                                            HospitalCategory_Id = model.HospitalCategory_Id,
-                                            Country = model.Country,
-                                            City = model.City,
-                                            Full_Address = model.Full_Address,
-                                            Phone = model.Phone,
                                             Status = model.Status,
                                             UpdatedBy = model.UpdatedBy,
                                             UpdatedDate = model.UpdatedDate
@@ -144,13 +130,13 @@ namespace SoftEngine.TRDCore.TRD
             }
             return response;
         }
-        public async Task<DataBaseResponse> DeleteHospitalInfo(int id)
+        public async Task<DataBaseResponse> DeleteHospitalCategoryInfo(int id)
         {
             var response = new DataBaseResponse();
             await using (var connection = new SqlConnection(_dbSettings.DefaultConnection))
             {
                 StringBuilder strSql = new StringBuilder();
-                strSql.AppendLine(" UPDATE Hospital SET Status=@Status WHERE Id=@Id");
+                strSql.AppendLine(" UPDATE HospitalCategory SET Status=@Status WHERE Id=@Id");
                 try
                 {
                     var result = connection.Execute(strSql.ToString(), new { Status = 0, Id = id, });
@@ -168,23 +154,22 @@ namespace SoftEngine.TRDCore.TRD
             return response;
         }
 
-        public bool GetDuplicateHospital(string name, int id)
+        public bool GetDuplicateHospitalCategory(string name, int id)
         {
             using (var connection = new SqlConnection(_dbSettings.DefaultConnection))
             {
-                var sql = @" Select Id,Name,Status from Hospital where Status=1  ";
+                var sql = @" Select Id,Name,Status from HospitalCategory where Status=1  ";
                 if (!string.IsNullOrEmpty(name))
                     sql += @" and REPLACE(LOWER(Name), ' ', '') =REPLACE('" + name + @"', ' ', '') ";
                 if (id > 0)
                     sql += @" and Id!=" + id + " ";
 
-                var models = connection.Query<Hospital>(sql);
+                var models = connection.Query<HospitalCategory>(sql);
                 if (models.Count() == 0)
                     return true;
                 else
                     return false;
             }
         }
-        #endregion
     }
 }
