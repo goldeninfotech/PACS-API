@@ -78,6 +78,7 @@ builder.Services.AddScoped<IUserLogin, UserLoginBLL>();
 //});
 
 builder.Services.AddScoped<IDepartment, DepartmentBLL>();
+builder.Services.AddScoped<IUsers, UsersBLL>();
 
 var app = builder.Build();
 
