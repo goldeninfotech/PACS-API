@@ -96,6 +96,7 @@ namespace GDNTRDSolution_API.Areas.TRD.Controllers
                 return BadRequest();
         }
 
+
         #endregion
     }
 }
