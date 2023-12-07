@@ -13,13 +13,12 @@ public class Hospital
 	public string? Name {get;set;}
 	public string? Description {get;set;}
 	public string? Email {get;set;}
-	public int Category_Id {get;set;}
+	public int HospitalCategory_Id { get;set;}
 	public string? Country {get;set;}
 	public string? City {get;set;}
 	public string? Full_Address {get;set;}
 	public string? Phone {get;set;}
-	public string? Type {get;set;}
-	public string? Status {get;set;}
+	public int Status {get;set;}
 	public string? AddedDate {get;set;}
 	public string? AddedBy {get;set;}
 	public string? UpdatedDate {get;set;}
