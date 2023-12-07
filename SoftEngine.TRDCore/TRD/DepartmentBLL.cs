@@ -19,6 +19,8 @@ namespace SoftEngine.TRDCore.TRD
         {
             _dbSettings = dbSettings;
         }
+
+        #region Department CRUD 
         public IEnumerable<Departments> GetDepartmentList()
         {
             using (var connection = new SqlConnection(_dbSettings.DefaultConnection))
@@ -169,6 +171,8 @@ namespace SoftEngine.TRDCore.TRD
                     return false;
             }
         }
+
+        #endregion
 
     }
 }
