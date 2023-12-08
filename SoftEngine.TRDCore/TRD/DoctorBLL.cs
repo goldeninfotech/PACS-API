@@ -44,57 +44,87 @@ namespace SoftEngine.TRDCore.TRD
         public async Task<DataBaseResponse> SaveDoctorInfo(Doctor model)
         {
             var response = new DataBaseResponse();
-            await using (var connection = new SqlConnection(_dbSettings.DefaultConnection))
+            bool duplicateresult = GetDuplicateDoctor(model.DoctorName, 0);
+            if (duplicateresult)
             {
-                bool duplicateresult = GetDuplicateDoctor(model.DoctorName, 0);
-                if (duplicateresult)
+                try
                 {
-                    StringBuilder strSql = new StringBuilder();
-                    strSql.AppendLine(" INSERT INTO  Doctor");
-                    strSql.AppendLine(" ( User_Id,DoctorName,BMDC_No,Email,Gender,DOB,Hospital_Id,Department_Id,Designation_Id,Category_Id,Degree,Country,City,Full_Address, Immergency_Contact,Status,AddedBy,AddedDate) VALUES ");
-                    strSql.AppendLine(" ( @User_Id,@DoctorName,@BMDC_No,@Email,@Gender,@DOB,@Hospital_Id,@Department_Id,@Designation_Id,@Category_Id,@Degree,@Country,@City,@Full_Address, @Immergency_Contact,@Status,@AddedBy,@AddedDate) ");
-                    try
+                    await using (var connection = new SqlConnection(_dbSettings.DefaultConnection))
                     {
-                        var Saveresult = connection.Execute(strSql.ToString(),
-                                        new
-                                        {
-                                            User_Id = model.User_Id,
-                                            DoctorName = model.DoctorName,
-                                            BMDC_No = model.BMDC_No,
-                                            Email = model.Email,
-                                            Gender = model.Gender,
-                                            DOB = model.DOB,
-                                            Hospital_Id = model.Hospital_Id,
-                                            Department_Id = model.Department_Id,
-                                            Designation_Id = model.Designation_Id,
-                                            Category_Id = model.Category_Id,
-                                            Degree = model.Degree,
-                                            Country = model.Country,
-                                            City = model.City,
-                                            Full_Address = model.Full_Address,
-                                            Immergency_Contact = model.Immergency_Contact,
-                                            Status = model.Status,
-                                            AddedBy = model.AddedBy,
-                                            AddedDate = model.AddedDate,
-                                        }
-                                        );
-                        response.ReturnValue = Saveresult;
-                        response.Message = GlobalConst.INSERT_SUCCESS_MESSAGE;
-                        response.IsSuccess = true;
-                    }
-                    catch (Exception exp)
-                    {
-                        response.ReturnValue = -1;
-                        response.Message = exp.Message;
-                        response.IsSuccess = false;
+                        StringBuilder strSql = new StringBuilder();
+                        await connection.OpenAsync();
+                        using (var transaction = connection.BeginTransaction())
+                        {
+                            strSql.AppendLine(" INSERT INTO  [User]");
+                            strSql.AppendLine(" ( Full_Name,UserName,Password,Gender,DOB,Country,City,Full_Address,Phone,Role_id,UserType,Status,AddedBy,AddedDate)  ");
+                            strSql.AppendLine(" Output Inserted.Id VALUES ( @Full_Name,@UserName,@Password,@Gender,@DOB,@Country,@City,@Full_Address,@Phone,@Role_id,@UserType,@Status,@AddedBy,@AddedDate);");
+
+                            int Saveresult = connection.ExecuteScalar<int>(strSql.ToString(), new
+                            {
+                                Full_Name = model.DoctorName,
+                                UserName = model.UserName,
+                                Password = model.Password,
+                                Gender = model.Gender,
+                                DOB = model.DOB,
+                                Country = model.Country,
+                                City = model.City,
+                                Full_Address = model.Full_Address,
+                                Phone = model.Immergency_Contact,
+                                Role_id = model.RoleId,
+                                UserType = "3",
+                                Status = model.Status,
+                                AddedBy = model.AddedBy,
+                                AddedDate = model.AddedDate,
+
+                            }, transaction);
+                            strSql = new StringBuilder();
+                            strSql.AppendLine(" INSERT INTO  Doctor");
+                            strSql.AppendLine(" ( User_Id,DoctorName,BMDC_No,Email,Gender,DOB,Hospital_Id,Department_Id,Designation_Id,Category_Id,Degree,Country,City,Full_Address, Immergency_Contact,Status,AddedBy,AddedDate) VALUES ");
+                            strSql.AppendLine(" ( @User_Id,@DoctorName,@BMDC_No,@Email,@Gender,@DOB,@Hospital_Id,@Department_Id,@Designation_Id,@Category_Id,@Degree,@Country,@City,@Full_Address, @Immergency_Contact,@Status,@AddedBy,@AddedDate) ");
+
+                            var resul2t = await connection.ExecuteAsync(strSql.ToString(), new
+                            {
+                                User_Id = Saveresult,
+                                DoctorName = model.DoctorName,
+                                BMDC_No = model.BMDC_No,
+                                Email = model.Email,
+                                Gender = model.Gender,
+                                DOB = model.DOB,
+                                Hospital_Id = model.Hospital_Id,
+                                Department_Id = model.Department_Id,
+                                Designation_Id = model.Designation_Id,
+                                Category_Id = model.Category_Id,
+                                Degree = model.Degree,
+                                Country = model.Country,
+                                City = model.City,
+                                Full_Address = model.Full_Address,
+                                Immergency_Contact = model.Immergency_Contact,
+                                Status = model.Status,
+                                AddedBy = model.AddedBy,
+                                AddedDate = model.AddedDate,
+                            }, transaction);
+
+                            transaction.Commit();
+
+                            response.ReturnValue = 1;
+                            response.Message = GlobalConst.INSERT_SUCCESS_MESSAGE;
+                            response.IsSuccess = true;
+                        }
+
                     }
                 }
-                else
+                catch (Exception exp)
                 {
                     response.ReturnValue = -1;
-                    response.Message = GlobalConst.GET_DUPLICATEDATA;
+                    response.Message = exp.Message;
                     response.IsSuccess = false;
                 }
+            }
+            else
+            {
+                response.ReturnValue = -1;
+                response.Message = GlobalConst.GET_DUPLICATEDATA;
+                response.IsSuccess = false;
             }
             return response;
         }
@@ -109,7 +139,7 @@ namespace SoftEngine.TRDCore.TRD
                 {
                     StringBuilder strSql = new StringBuilder();
                     strSql.AppendLine(" UPDATE  Doctor SET ");
-                    strSql.AppendLine(" User_Id=@User_Id,DoctorName=@DoctorName,BMDC_No=@BMDC_No,Email=@Email,Gender=@Gender,DOB=@DOB,Hospital_Id=@Hospital_Id, ");
+                    strSql.AppendLine(" DoctorName=@DoctorName,BMDC_No=@BMDC_No,Email=@Email,Gender=@Gender,DOB=@DOB,Hospital_Id=@Hospital_Id, ");
                     strSql.AppendLine(" Department_Id=@Department_Id,Designation_Id=@Designation_Id,Category_Id=@Category_Id,Degree=@Degree,Country=@Country,City=@City,Full_Address=@Full_Address,Immergency_Contact=@Immergency_Contact ");
                     strSql.AppendLine(" Where Id=@Id ");
                     try
@@ -118,7 +148,6 @@ namespace SoftEngine.TRDCore.TRD
                                         new
                                         {
                                             Id = model.Id,
-                                            User_Id = model.User_Id,
                                             DoctorName = model.DoctorName,
                                             BMDC_No = model.BMDC_No,
                                             Email = model.Email,
@@ -199,5 +228,9 @@ namespace SoftEngine.TRDCore.TRD
                     return false;
             }
         }
+
+
+        #region 
+        #endregion
     }
 }

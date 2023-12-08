@@ -60,7 +60,7 @@ namespace GDNTRDSolution_API.Areas.TRD.Controllers
             {
                 model.Status = 1;
                 model.AddedBy = "";
-                model.Password = ReturnData.GenerateMD5(model.Password); ;
+                model.Password = ReturnData.GenerateMD5(model.Password); 
                 model.AddedDate = DateTime.Now.ToString("dd-mm-yyyy");
                 var data = await _users.SaveUsersInfo(model);
                 return Ok(data);

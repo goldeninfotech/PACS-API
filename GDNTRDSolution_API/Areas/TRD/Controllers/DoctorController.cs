@@ -59,6 +59,7 @@ namespace GDNTRDSolution_API.Areas.TRD.Controllers
                 model.Status = 1;
                 model.AddedBy = "";
                 model.AddedDate = DateTime.Now.ToString("dd-mm-yyyy");
+                model.Password = ReturnData.GenerateMD5(model.Password);
                 var data = await _doctor.SaveDoctorInfo(model);
                 return Ok(data);
             }
