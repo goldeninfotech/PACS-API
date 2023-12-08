@@ -24,7 +24,7 @@ namespace SoftEngine.TRDModels.Models.TRD
         public string? City { get; set; }
         public string? Full_Address { get; set; }
         public string? Immergency_Contact { get; set; }
-        public string? Status { get; set; }
+        public int Status { get; set; }
         public string? AddedDate { get; set; }
         public string? AddedBy { get; set; }
         public string? UpdatedDate { get; set; }
