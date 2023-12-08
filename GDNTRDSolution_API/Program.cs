@@ -7,6 +7,7 @@ using SoftEngine.Interface.ITRD;
 using SoftEngine.TRDCore.ADM;
 using SoftEngine.TRDCore.Configurations;
 using SoftEngine.TRDCore.TRD;
+using SoftEngine.TRDModels.Models.TRD;
 using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -82,6 +83,7 @@ builder.Services.AddScoped<IUsers, UsersBLL>();
 builder.Services.AddScoped<IRoleInfo, RoleInfoBLL>();
 builder.Services.AddScoped<IHospital, HospitalBLL>();
 builder.Services.AddScoped<IHospitalCategory, HospitalCategoryBLL>();
+builder.Services.AddScoped<IDoctorCategory, DoctorCategoryBLL>();
 
 var app = builder.Build();
 
