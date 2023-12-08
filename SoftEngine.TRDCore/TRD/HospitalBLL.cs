@@ -40,7 +40,7 @@ namespace SoftEngine.TRDCore.TRD
                 return models; 
             }
         }
-        public async Task<DataBaseResponse> SaveHospitalInfo(Hospital model)
+        public async Task<DataBaseResponse> SaveHospitalInfo2(Hospital model)
         {
             var response = new DataBaseResponse();
             await using (var connection = new SqlConnection(_dbSettings.DefaultConnection))
@@ -51,7 +51,7 @@ namespace SoftEngine.TRDCore.TRD
                     StringBuilder strSql = new StringBuilder();
                     strSql.AppendLine(" INSERT INTO  Hospital");
                     strSql.AppendLine(" ( User_Id,Name,Description,Email,HospitalCategory_Id,Country,City,Full_Address,Phone,Status,AddedBy,AddedDate) VALUES ");
-                    strSql.AppendLine(" ( @User_Id,@Name,@Description,@Email,@HospitalCategory_Id,@Country,@City,@Full_Address,@Phone,@Status,@AddedBy,@AddedDate);");
+                    strSql.AppendLine(" ( @User_Id,@Name,@Description,@Email,@HospitalCategory_Id,@Country,@City,@Full_Address,@Phone,@Status,@AddedBy,@AddedDate)");
                     try
                     {
                         var Saveresult = connection.Execute(strSql.ToString(),
@@ -92,6 +92,88 @@ namespace SoftEngine.TRDCore.TRD
             return response;
         }
 
+        public async Task<DataBaseResponse> SaveHospitalInfo(Hospital model)
+        {
+            var response = new DataBaseResponse();
+            bool duplicateresult = GetDuplicateHospital(model.Name, 0);
+            if (duplicateresult)
+            {
+                try
+                {
+                    await using (var connection = new SqlConnection(_dbSettings.DefaultConnection))
+                    {
+                        StringBuilder strSql = new StringBuilder();
+                        await connection.OpenAsync();
+                        using (var transaction = connection.BeginTransaction())
+                        {
+                            strSql.AppendLine(" INSERT INTO  [User]");
+                            strSql.AppendLine(" ( Full_Name,UserName,Password,Gender,DOB,Country,City,Full_Address,Phone,Role_id,UserType,Status,AddedBy,AddedDate)  ");
+                            strSql.AppendLine(" Output Inserted.Id VALUES ( @Full_Name,@UserName,@Password,@Gender,@DOB,@Country,@City,@Full_Address,@Phone,@Role_id,@UserType,@Status,@AddedBy,@AddedDate);");
+
+                            int Saveresult = connection.ExecuteScalar<int>(strSql.ToString(), new
+                            {
+                                Full_Name = model.Name,
+                                UserName = model.UserName,
+                                Password = model.Password,
+                                Gender = "",
+                                DOB = "",
+                                Country = model.Country,
+                                City = model.City,
+                                Full_Address = model.Full_Address,
+                                Phone = model.Phone,
+                                Role_id = model.RoleId,
+                                UserType = "2",
+                                Status = model.Status,
+                                AddedBy = model.AddedBy,
+                                AddedDate = model.AddedDate,
+
+                            }, transaction);
+                            strSql = new StringBuilder();
+                            strSql.AppendLine(" INSERT INTO  Hospital");
+                            strSql.AppendLine(" ( User_Id,Name,Description,Email,HospitalCategory_Id,Country,City,Full_Address,Phone,Status,AddedBy,AddedDate) VALUES ");
+                            strSql.AppendLine(" ( @User_Id,@Name,@Description,@Email,@HospitalCategory_Id,@Country,@City,@Full_Address,@Phone,@Status,@AddedBy,@AddedDate)");
+                            var resul2t = await connection.ExecuteAsync(strSql.ToString(), new
+                            {
+                                User_Id = Saveresult,
+                                Name = model.Name,
+                                Description = model.Description,
+                                Email = model.Email,
+                                HospitalCategory_Id = model.HospitalCategory_Id,
+                                Country = model.Country,
+                                City = model.City,
+                                Full_Address = model.Full_Address,
+                                Phone = model.Phone,
+                                Status = model.Status,
+                                AddedBy = model.AddedBy,
+                                AddedDate = model.AddedDate
+                            }, transaction);
+
+                            transaction.Commit();
+
+                            response.ReturnValue = 1;
+                            response.Message = GlobalConst.INSERT_SUCCESS_MESSAGE;
+                            response.IsSuccess = true;
+                        }
+
+                    }
+                }
+                catch (Exception exp)
+                {
+                    response.ReturnValue = -1;
+                    response.Message = exp.Message;
+                    response.IsSuccess = false;
+                }
+            }
+            else
+            {
+                response.ReturnValue = -1;
+                response.Message = GlobalConst.GET_DUPLICATEDATA;
+                response.IsSuccess = false;
+            }
+            return response;
+        }
+
+
         public async Task<DataBaseResponse> UpdateHospitalInfo(Hospital model)
         {
             var response = new DataBaseResponse();
@@ -102,7 +184,7 @@ namespace SoftEngine.TRDCore.TRD
                 {
                     StringBuilder strSql = new StringBuilder();
                     strSql.AppendLine(" UPDATE  Hospital SET ");
-                    strSql.AppendLine(" User_Id=@User_Id,Name=@Name,Description=@Description,Email=@Email,HospitalCategory_Id=@HospitalCategory_Id,Country=@Country,City=@City, ");
+                    strSql.AppendLine(" Name=@Name,Description=@Description,Email=@Email,HospitalCategory_Id=@HospitalCategory_Id,Country=@Country,City=@City, ");
                     strSql.AppendLine(" Full_Address=@Full_Address,Phone=@Phone,Status=@Status, UpdatedBy=@UpdatedBy,UpdatedDate=@UpdatedDate Where Id=@Id ");
                     try
                     {
@@ -110,7 +192,6 @@ namespace SoftEngine.TRDCore.TRD
                                         new
                                         {
                                             Id = model.Id,
-                                            User_Id = model.User_Id,
                                             Name = model.Name,
                                             Description = model.Description,
                                             Email = model.Email,

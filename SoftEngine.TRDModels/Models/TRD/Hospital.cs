@@ -23,5 +23,8 @@ public class Hospital
 	public string? AddedBy {get;set;}
 	public string? UpdatedDate {get;set;}
 	public string? UpdatedBy {get;set;}
+	public string? UserName { get;set;}
+	public string? Password { get;set;}
+	public int RoleId { get;set;}
     }
 }

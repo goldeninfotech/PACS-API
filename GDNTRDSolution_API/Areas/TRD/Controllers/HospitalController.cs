@@ -58,6 +58,7 @@ namespace GDNTRDSolution_API.Areas.TRD.Controllers
         {
             if (ModelState.IsValid)
             {
+                model.Password = ReturnData.GenerateMD5(model.Password);
                 model.Status = 1;
                 model.AddedBy = "";
                 model.AddedDate = DateTime.Now.ToString("dd-mm-yyyy");

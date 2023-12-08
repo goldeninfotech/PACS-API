@@ -18,7 +18,9 @@ namespace SoftEngine.TRDCore.TRD
         public DoctorBLL(ConnectionStrings dbSettings)
         {
             _dbSettings = dbSettings;
-        } 
+        }
+
+        #region Doctor CRUD
         public IEnumerable<Doctor> GetDoctorList()
         {
             using (var connection = new SqlConnection(_dbSettings.DefaultConnection))
@@ -40,7 +42,6 @@ namespace SoftEngine.TRDCore.TRD
                 return models;
             }
         }
-
         public async Task<DataBaseResponse> SaveDoctorInfo(Doctor model)
         {
             var response = new DataBaseResponse();
@@ -128,7 +129,6 @@ namespace SoftEngine.TRDCore.TRD
             }
             return response;
         }
-
         public async Task<DataBaseResponse> UpdateDoctorInfo(Doctor model)
         {
             var response = new DataBaseResponse();
@@ -210,7 +210,6 @@ namespace SoftEngine.TRDCore.TRD
             }
             return response;
         }
-
         public bool GetDuplicateDoctor(string name, int id) 
         {
             using (var connection = new SqlConnection(_dbSettings.DefaultConnection))
@@ -229,8 +228,6 @@ namespace SoftEngine.TRDCore.TRD
             }
         }
 
-
-        #region 
         #endregion
     }
 }
