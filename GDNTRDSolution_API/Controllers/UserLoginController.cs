@@ -1,14 +1,16 @@
 ﻿using Azure;
 using GDNTRDSolution_API.Common;
 using GDNTRDSolution_API.Models;
-using MailKit;
+using GDNTRDSolution_API.Service;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
 using SoftEngine.Interface.IADM;
+using SoftEngine.Interface.Models;
 using SoftEngine.TRDModels.Models.ADM;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
+using System.Text.RegularExpressions;
 
 namespace GDNTRDSolution_API.Controllers
 {
@@ -19,14 +21,15 @@ namespace GDNTRDSolution_API.Controllers
         private IConfiguration _config;
         private readonly IUserLogin _userLogin ;
         private readonly TokenVerify _tokenVerify;
-       // private readonly IMailService _mailService;
+        private readonly IMailService _mailService;
 
-        public UserLoginController(IConfiguration config, IUserLogin userLogin, TokenVerify tokenVerify)
+        public UserLoginController(IConfiguration config, IUserLogin userLogin, TokenVerify tokenVerify, IMailService _MailService)
         {
             _config = config;
             _userLogin = userLogin;
             _tokenVerify = tokenVerify;
-          //  _mailService = _MailService;
+          //  _mailService = mailService;
+            _mailService = _MailService;
         }
 
         #region User Login 
@@ -93,5 +96,106 @@ namespace GDNTRDSolution_API.Controllers
 
         #endregion
 
+
+
+        #region Password Recovery
+
+        [HttpPut]
+        [Route("PasswordRecovery")]
+        public IActionResult PasswordRecovery(string email)
+        {
+            MailData obj = new MailData();
+            obj.EmailToId = email;
+            obj.EmailSubject = "Password Recovery";
+            obj.EmailBody = "Password Recovery Code Is : ";
+            obj.EmailToName = "GDN";
+            var number = GenerateNewRandom();
+
+            obj.EmailBody += number;
+            string pattern = @"^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$";
+
+            if (Regex.IsMatch(email, pattern))
+            {
+                var user = _userLogin.GetUserinfoByEmail(email);
+                if (user == null)
+                {
+                    return Ok(new { IsSuccess = false, Message = "No user found with this email." });
+                }
+                else if (user.Id > 0)
+                {
+                    obj.EmailBody = "Hello " + user.Full_Name + ", Your Password Recovery Code Is : " + number + "";
+                    bool sendmail = _mailService.SendMail(obj);
+                    // bool sendmail = _mailService.SendMailAsync(obj);
+
+                    if (sendmail)
+                    {
+                        var data = _userLogin.PasswordRecovery(email, number);
+                        return Ok(data.Result);
+                    }
+                }
+                else
+                    return Ok(new { IsSuccess = false, Message = "Can't send the email. Please try again later." });
+            }
+            else
+                return Ok(new { IsSuccess = false, Message = "Invalid email address." });
+
+            return Ok(new { IsSuccess = false, Message = " Something is missing. Please try again later." });
+        }
+
+        private static string GenerateNewRandom()
+        {
+            Random generator = new Random();
+            String r = generator.Next(0, 1000000).ToString("D6");
+            if (r.Distinct().Count() == 1)
+            {
+                r = GenerateNewRandom();
+            }
+            return r;
+        }
+
+        [HttpGet]
+        [Route("CheckRecoveryCode")]
+        public IActionResult CheckRecoveryCode(int code)
+        {
+            bool data = _userLogin.CheckRecoveryCode(code);
+            DataBaseResponse obj = new DataBaseResponse();
+            if (data)
+            {
+                obj.IsSuccess = data;
+                obj.Message = "Successfully code matched.";
+                obj.ReturnValue = 1;
+            }
+            else
+            {
+                obj.IsSuccess = false;
+                obj.Message = "Code isn't matched.";
+                obj.ReturnValue = -1;
+            }
+            return Ok(obj);
+        }
+
+
+        [HttpPut]
+        [Route("ChangePassword")]
+        public IActionResult ChangePassword(PasswordChange passwordChange)
+        {
+
+            if (!string.IsNullOrEmpty(passwordChange.Password) && !string.IsNullOrEmpty(passwordChange.VerifyCode))
+            {
+                string password = ReturnData.GenerateMD5(passwordChange.Password); // md5 Hash Password
+                var data = _userLogin.ChangePassword(password, passwordChange.VerifyCode);
+                return Ok(data.Result);
+            }
+            else
+            {
+                DataBaseResponse obj = new DataBaseResponse();
+                obj.IsSuccess = false;
+                obj.ReturnValue = -1;
+                obj.Message = "Failed! Password Change";
+                return Ok(obj);
+            }
+        }
+
+        #endregion
     }
 }

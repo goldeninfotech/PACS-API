@@ -18,5 +18,6 @@ namespace SoftEngine.TRDModels.Models.ADM
         public int HospitalId { get; set; }
         public string? HospitalName { get; set; }
         public string? PasswordRecCode { get; set; } 
+        public string? Email { get; set; } 
     }
 }
