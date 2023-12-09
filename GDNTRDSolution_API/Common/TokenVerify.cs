@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using SoftEngine.Interface.IADM;
+using SoftEngine.TRDModels.Models.ADM;
 using System.Security.Claims;
 
 namespace GDNTRDSolution_API.Common
@@ -13,77 +14,25 @@ namespace GDNTRDSolution_API.Common
             _httpContextAccessor = httpContextAccessor;
             _userPermisson = userPermisson;
         }
-        //public ADM_UserLogin GetCurrentUser()
-        //{
-        //    var identity = _httpContextAccessor.HttpContext.User.Identity as ClaimsIdentity;
-        //    if (identity != null)
-        //    {
-        //        var userClaims = identity.Claims;
-        //        return new ADM_UserLogin
-        //        {
-        //            EmpName = userClaims.FirstOrDefault(x => x.Type == "EmpName")?.Value,
-        //            // Email = userClaims.FirstOrDefault(x => x.Type == ClaimTypes.Email)?.Value,
-        //            EmpCode = Convert.ToInt32((userClaims.FirstOrDefault(x => x.Type == "EmpCode")?.Value)),
-        //            CompanyID = Convert.ToInt32((userClaims.FirstOrDefault(x => x.Type == "CompanyID")?.Value)),
-        //            CompanyName = userClaims.FirstOrDefault(x => x.Type == "CompanyName")?.Value,
+        public ADM_UserLogin GetCurrentUser()
+        {
+            var identity = _httpContextAccessor.HttpContext.User.Identity as ClaimsIdentity;
+            if (identity != null)
+            {
+                var userClaims = identity.Claims;
+                return new ADM_UserLogin
+                {
+                    Full_Name = userClaims.FirstOrDefault(x => x.Type == "Full_Name")?.Value,
+                    Id = Convert.ToInt32((userClaims.FirstOrDefault(x => x.Type == "Id")?.Value)),
+                    DoctorId = Convert.ToInt32((userClaims.FirstOrDefault(x => x.Type == "DoctorId")?.Value)),
+                    DoctorName = userClaims.FirstOrDefault(x => x.Type == "DoctorName")?.Value,
+                    BMDC_No = userClaims.FirstOrDefault(x => x.Type == "BMDC_No")?.Value,
+                    HospitalName = userClaims.FirstOrDefault(x => x.Type == "HospitalName")?.Value,
+                    HospitalId = Convert.ToInt32((userClaims.FirstOrDefault(x => x.Type == "HospitalId")?.Value)),
+                };
+            }
+            return null;
+        }
 
-        //            //EmpName = userClaims.FirstOrDefault(x => x.Type == ClaimTypes.NameIdentifier)?.Value,
-        //            //Email = userClaims.FirstOrDefault(x => x.Type == ClaimTypes.Email)?.Value,
-        //            //EmpCode = Convert.ToInt32((userClaims.FirstOrDefault(x => x.Type == ClaimTypes.Sid)?.Value)),
-        //            //CompanyID = Convert.ToInt32((userClaims.FirstOrDefault(x => x.Type == ClaimTypes.Spn)?.Value)),
-        //            //CompanyName = userClaims.FirstOrDefault(x => x.Type == ClaimTypes.Name)?.Value,
-        //        };
-        //    }
-        //    return null;
-        //}
-
-
-        //public bool GetUserPermissionByEmpId(int subMenuId, string type, int EmpCode)
-        //{
-        //    bool status = false;
-        //    List<ADM_DashbordMenuListViewModel> objectList = new List<ADM_DashbordMenuListViewModel>();
-
-        //    if (EmpCode > 0)
-        //        objectList = _userPermisson.DashbordMenuList(EmpCode, "");
-
-        //    if (objectList != null || objectList.Count() > 0)
-        //    {
-        //        if (type == "DataView")
-        //        {
-        //            var objectList2 = objectList.Where(x => x.SubMenuId == subMenuId && x.DataView == true).ToList();
-        //            if (objectList2.Count == 1)
-        //                status = true;
-        //            else
-        //                status = false;
-        //        }
-        //        else if (type == "DataInsert")
-        //        {
-        //            var objectList2 = objectList.Where(x => x.SubMenuId == subMenuId && x.DataInsert == true).ToList();
-        //            if (objectList2.Count == 1)
-        //                status = true;
-        //            else
-        //                status = false;
-        //        }
-        //        else if (type == "DataUpdate")
-        //        {
-        //            var objectList2 = objectList.Where(x => x.SubMenuId == subMenuId && x.DataUpdate == true).ToList();
-        //            if (objectList2.Count == 1)
-        //                status = true;
-        //            else
-        //                status = false;
-        //        }
-        //        else if (type == "DataDelete")
-        //        {
-        //            var objectList2 = objectList.Where(x => x.SubMenuId == subMenuId && x.DataDelete == true).ToList();
-        //            if (objectList2.Count == 1)
-        //                status = true;
-        //            else
-        //                status = false;
-        //        }
-        //        else
-        //            status = false;
-        //    }
-        //    return status;
-        //}
     }
 }

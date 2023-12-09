@@ -9,6 +9,9 @@ using SoftEngine.TRDCore.Configurations;
 using SoftEngine.TRDCore.TRD;
 using SoftEngine.TRDModels.Models.TRD;
 using System.Text;
+using GDNTRDSolution_API.Service;
+using GDNTRDSolution_API.Models;
+using GDNTRDSolution_API.Common;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -18,21 +21,21 @@ builder.Services.AddSingleton(connectionStrings);
 
 // Add token 
 
-//builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
-//    .AddJwtBearer(options =>
-//    {
-//        options.TokenValidationParameters = new TokenValidationParameters
-//        {
-//            ValidateIssuer = true,
-//            ValidateAudience = true,
-//            ValidateLifetime = true,
-//            ValidateIssuerSigningKey = true,
-//            ValidIssuer = builder.Configuration["Jwt:Issuer"],
-//            ValidAudience = builder.Configuration["Jwt:Audience"],
-//            IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["Jwt:Key"]))
-//        };
-//        options.RequireHttpsMetadata = false;
-//    });
+builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+    .AddJwtBearer(options =>
+    {
+        options.TokenValidationParameters = new TokenValidationParameters
+        {
+            ValidateIssuer = true,
+            ValidateAudience = true,
+            ValidateLifetime = true,
+            ValidateIssuerSigningKey = true,
+            ValidIssuer = builder.Configuration["Jwt:Issuer"],
+            ValidAudience = builder.Configuration["Jwt:Audience"],
+            IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["Jwt:Key"]))
+        };
+        options.RequireHttpsMetadata = false;
+    });
 
 builder.Services.AddHttpContextAccessor();
 
@@ -46,8 +49,6 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-// Register the service implementation and interface
-builder.Services.AddScoped<IUserLogin, UserLoginBLL>();
 
 //builder.Services.AddSwaggerGen(opt =>
 //{
@@ -78,6 +79,14 @@ builder.Services.AddScoped<IUserLogin, UserLoginBLL>();
 //    });
 //});
 
+builder.Services.Configure<MailSettings>(builder.Configuration.GetSection("MailSettings"));
+builder.Services.AddTransient<IMailService, MailService>();
+
+
+// Register the service implementation and interface
+builder.Services.AddScoped<IUserLogin, UserLoginBLL>();
+builder.Services.AddScoped<TokenVerify, TokenVerify>();
+builder.Services.AddScoped<IUserPermisson, UserPermissonBLL>();
 builder.Services.AddScoped<IDepartment, DepartmentBLL>();
 builder.Services.AddScoped<IUsers, UsersBLL>();
 builder.Services.AddScoped<IRoleInfo, RoleInfoBLL>();

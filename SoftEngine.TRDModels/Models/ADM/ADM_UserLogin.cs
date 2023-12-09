@@ -8,15 +8,15 @@ namespace SoftEngine.TRDModels.Models.ADM
 {
     public class ADM_UserLogin
     {
-        public int EmpCode { get; set; }
-        public string? EmpName { get; set; }
-        public string? Username { get; set; }
+        public int Id { get; set; }
+        public string? Full_Name { get; set; }
+        public string? UserName { get; set; }
         public string? Password { get; set; }
-        public string? Email { get; set; }
-        public string? CompanyName { get; set; }
-        public int CompanyID { get; set; }
-        public int RoleId { get; set; }
-        public string? RoleName { get; set; }
-        public string? PasswordRecCode { get; set; }
+        public string? DoctorName { get; set; }
+        public string? BMDC_No { get; set; }
+        public int DoctorId { get; set; }
+        public int HospitalId { get; set; }
+        public string? HospitalName { get; set; }
+        public string? PasswordRecCode { get; set; } 
     }
 }
