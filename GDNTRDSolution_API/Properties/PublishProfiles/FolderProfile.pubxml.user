@@ -5,7 +5,7 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
 <Project>
   <PropertyGroup>
     <_PublishTargetUrl>D:\Dev Software2\Publish Project\Medical Software API Publish</_PublishTargetUrl>
-    <History>True|2023-12-10T05:09:33.4408971Z;</History>
+    <History>True|2023-12-10T08:36:23.0439372Z;True|2023-12-10T11:09:33.4408971+06:00;</History>
     <LastFailureDetails />
   </PropertyGroup>
 </Project>

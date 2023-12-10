@@ -55,7 +55,6 @@ namespace GDNTRDSolution_API.Areas.TRD.Controllers
             return Ok(new { IsSuccess = response.IsSuccess, Message = response.Message, resultData = data });
         }
 
-        [Authorize]
         [HttpPost]
         [Route("SaveUserInfo")]
         public async Task<IActionResult> SaveUserInfo(User model)
