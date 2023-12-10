@@ -1,5 +1,6 @@
 ﻿using GDNTRDSolution_API.Common;
 using GDNTRDSolution_API.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using SoftEngine.Interface.ITRD;
 using SoftEngine.TRDModels.Models.TRD;
@@ -16,6 +17,7 @@ namespace GDNTRDSolution_API.Areas.TRD.Controllers
             _doctor = doctor;
         }
         #region Doctor CRUD
+        [Authorize]
         [HttpGet]
         [Route("GetDoctorList")]
         public IActionResult GetDoctorList(int pageNumber = 1, int limit = 10)
@@ -40,6 +42,7 @@ namespace GDNTRDSolution_API.Areas.TRD.Controllers
             return Ok(new { IsSuccess = response.IsSuccess, Message = response.Message, resultData = result });
         }
 
+        [Authorize]
         [HttpGet]
         [Route("GetDoctorById")]
         public IActionResult GetDoctorById(int id)
@@ -67,6 +70,7 @@ namespace GDNTRDSolution_API.Areas.TRD.Controllers
                 return BadRequest();
         }
 
+        [Authorize]
         [HttpPut]
         [Route("UpdateDoctorInfo")]
         public async Task<IActionResult> UpdateDoctorInfo(Doctor model)
@@ -82,6 +86,7 @@ namespace GDNTRDSolution_API.Areas.TRD.Controllers
                 return BadRequest();
         }
 
+        [Authorize]
         [HttpDelete]
         [Route("DeleteDoctorInfo")]
         public async Task<IActionResult> DeleteDoctorInfo(int id)

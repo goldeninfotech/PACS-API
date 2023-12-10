@@ -1,0 +1,15 @@
+D:\Dev Software2\Medical Software\WebAPISoftware\WebAPISoftware\SoftEngine.Interface\bin\Release\net6.0\SoftEngine.Interface.deps.json
+D:\Dev Software2\Medical Software\WebAPISoftware\WebAPISoftware\SoftEngine.Interface\bin\Release\net6.0\SoftEngine.Interface.dll
+D:\Dev Software2\Medical Software\WebAPISoftware\WebAPISoftware\SoftEngine.Interface\bin\Release\net6.0\SoftEngine.Interface.pdb
+D:\Dev Software2\Medical Software\WebAPISoftware\WebAPISoftware\SoftEngine.Interface\bin\Release\net6.0\SoftEngine.TRDModels.dll
+D:\Dev Software2\Medical Software\WebAPISoftware\WebAPISoftware\SoftEngine.Interface\bin\Release\net6.0\SoftEngine.TRDModels.pdb
+D:\Dev Software2\Medical Software\WebAPISoftware\WebAPISoftware\SoftEngine.Interface\obj\Release\net6.0\SoftEngine.Interface.csproj.AssemblyReference.cache
+D:\Dev Software2\Medical Software\WebAPISoftware\WebAPISoftware\SoftEngine.Interface\obj\Release\net6.0\SoftEngine.Interface.GeneratedMSBuildEditorConfig.editorconfig
+D:\Dev Software2\Medical Software\WebAPISoftware\WebAPISoftware\SoftEngine.Interface\obj\Release\net6.0\SoftEngine.Interface.AssemblyInfoInputs.cache
+D:\Dev Software2\Medical Software\WebAPISoftware\WebAPISoftware\SoftEngine.Interface\obj\Release\net6.0\SoftEngine.Interface.AssemblyInfo.cs
+D:\Dev Software2\Medical Software\WebAPISoftware\WebAPISoftware\SoftEngine.Interface\obj\Release\net6.0\SoftEngine.Interface.csproj.CoreCompileInputs.cache
+D:\Dev Software2\Medical Software\WebAPISoftware\WebAPISoftware\SoftEngine.Interface\obj\Release\net6.0\SoftEngine.Interface.csproj.CopyComplete
+D:\Dev Software2\Medical Software\WebAPISoftware\WebAPISoftware\SoftEngine.Interface\obj\Release\net6.0\SoftEngine.Interface.dll
+D:\Dev Software2\Medical Software\WebAPISoftware\WebAPISoftware\SoftEngine.Interface\obj\Release\net6.0\refint\SoftEngine.Interface.dll
+D:\Dev Software2\Medical Software\WebAPISoftware\WebAPISoftware\SoftEngine.Interface\obj\Release\net6.0\SoftEngine.Interface.pdb
+D:\Dev Software2\Medical Software\WebAPISoftware\WebAPISoftware\SoftEngine.Interface\obj\Release\net6.0\ref\SoftEngine.Interface.dll

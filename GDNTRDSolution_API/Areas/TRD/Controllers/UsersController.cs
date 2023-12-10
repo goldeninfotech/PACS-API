@@ -1,5 +1,6 @@
 ﻿using GDNTRDSolution_API.Common;
 using GDNTRDSolution_API.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using SoftEngine.Interface.ITRD;
 using SoftEngine.TRDModels.Models.TRD;
@@ -18,6 +19,7 @@ namespace GDNTRDSolution_API.Areas.TRD.Controllers
 
 
         #region User CRUD
+        [Authorize]
         [HttpGet]
         [Route("GetUsersList")]
         public IActionResult GetUsersList(int pageNumber = 1, int limit = 10)
@@ -42,6 +44,8 @@ namespace GDNTRDSolution_API.Areas.TRD.Controllers
             return Ok(new { IsSuccess = response.IsSuccess, Message = response.Message, resultData = result });
         }
 
+
+        [Authorize]
         [HttpGet]
         [Route("GetUsersListById")]
         public IActionResult GetUsersListById(int id)
@@ -51,7 +55,7 @@ namespace GDNTRDSolution_API.Areas.TRD.Controllers
             return Ok(new { IsSuccess = response.IsSuccess, Message = response.Message, resultData = data });
         }
 
-
+        [Authorize]
         [HttpPost]
         [Route("SaveUserInfo")]
         public async Task<IActionResult> SaveUserInfo(User model)
@@ -69,6 +73,7 @@ namespace GDNTRDSolution_API.Areas.TRD.Controllers
                 return BadRequest();
         }
 
+        [Authorize]
         [HttpPut]
         [Route("UpdateUserInfo")]
         public async Task<IActionResult> UpdateUserInfo(User model)
@@ -84,6 +89,7 @@ namespace GDNTRDSolution_API.Areas.TRD.Controllers
                 return BadRequest();
         }
 
+        [Authorize]
         [HttpDelete]
         [Route("DeleteUserInfo")]
         public async Task<IActionResult> DeleteUserInfo(int id)

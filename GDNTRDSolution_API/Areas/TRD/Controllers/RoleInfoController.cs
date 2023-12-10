@@ -1,5 +1,6 @@
 ﻿using GDNTRDSolution_API.Common;
 using GDNTRDSolution_API.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.FileProviders;
 using SoftEngine.Interface.ITRD;
@@ -17,6 +18,7 @@ namespace GDNTRDSolution_API.Areas.TRD.Controllers
             _roleInfo = roleInfo;
         }
         #region RoleInfo CRUD
+        [Authorize]
         [HttpGet]
         [Route("GetRolesInfoList")]
         public IActionResult GetRolesInfoList(int pageNumber = 1, int limit = 10)
@@ -39,8 +41,9 @@ namespace GDNTRDSolution_API.Areas.TRD.Controllers
                 Data = paginatedData
             };
             return Ok(new { IsSuccess = response.IsSuccess, Message = response.Message, resultData = result });
-        }  
-           
+        }
+
+        [Authorize]
         [HttpGet]
         [Route("GetGetRolesInfoById")]
         public IActionResult GetGetRolesInfoById(int id)
@@ -50,7 +53,7 @@ namespace GDNTRDSolution_API.Areas.TRD.Controllers
             return Ok(new { IsSuccess = response.IsSuccess, Message = response.Message, resultData = data });
         }
 
-
+        [Authorize]
         [HttpPost]
         [Route("SaveRolesInfo")]
         public async Task<IActionResult> SaveRolesInfo(Roles model)
@@ -67,6 +70,7 @@ namespace GDNTRDSolution_API.Areas.TRD.Controllers
                 return BadRequest();
         }
 
+        [Authorize]
         [HttpPut]
         [Route("UpdateRolesInfo")]
         public async Task<IActionResult> UpdateRolesInfo(Roles model) 
@@ -82,6 +86,7 @@ namespace GDNTRDSolution_API.Areas.TRD.Controllers
                 return BadRequest();
         }
 
+        [Authorize]
         [HttpDelete]
         [Route("DeleteRolesInfo")]
         public async Task<IActionResult> DeleteRolesInfo(int id) 

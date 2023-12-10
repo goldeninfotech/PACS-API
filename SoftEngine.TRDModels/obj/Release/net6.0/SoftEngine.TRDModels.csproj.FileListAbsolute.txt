@@ -1,0 +1,11 @@
+D:\Dev Software2\Medical Software\WebAPISoftware\WebAPISoftware\SoftEngine.TRDModels\bin\Release\net6.0\SoftEngine.TRDModels.deps.json
+D:\Dev Software2\Medical Software\WebAPISoftware\WebAPISoftware\SoftEngine.TRDModels\bin\Release\net6.0\SoftEngine.TRDModels.dll
+D:\Dev Software2\Medical Software\WebAPISoftware\WebAPISoftware\SoftEngine.TRDModels\bin\Release\net6.0\SoftEngine.TRDModels.pdb
+D:\Dev Software2\Medical Software\WebAPISoftware\WebAPISoftware\SoftEngine.TRDModels\obj\Release\net6.0\SoftEngine.TRDModels.GeneratedMSBuildEditorConfig.editorconfig
+D:\Dev Software2\Medical Software\WebAPISoftware\WebAPISoftware\SoftEngine.TRDModels\obj\Release\net6.0\SoftEngine.TRDModels.AssemblyInfoInputs.cache
+D:\Dev Software2\Medical Software\WebAPISoftware\WebAPISoftware\SoftEngine.TRDModels\obj\Release\net6.0\SoftEngine.TRDModels.AssemblyInfo.cs
+D:\Dev Software2\Medical Software\WebAPISoftware\WebAPISoftware\SoftEngine.TRDModels\obj\Release\net6.0\SoftEngine.TRDModels.csproj.CoreCompileInputs.cache
+D:\Dev Software2\Medical Software\WebAPISoftware\WebAPISoftware\SoftEngine.TRDModels\obj\Release\net6.0\SoftEngine.TRDModels.dll
+D:\Dev Software2\Medical Software\WebAPISoftware\WebAPISoftware\SoftEngine.TRDModels\obj\Release\net6.0\refint\SoftEngine.TRDModels.dll
+D:\Dev Software2\Medical Software\WebAPISoftware\WebAPISoftware\SoftEngine.TRDModels\obj\Release\net6.0\SoftEngine.TRDModels.pdb
+D:\Dev Software2\Medical Software\WebAPISoftware\WebAPISoftware\SoftEngine.TRDModels\obj\Release\net6.0\ref\SoftEngine.TRDModels.dll

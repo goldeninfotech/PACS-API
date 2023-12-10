@@ -1,5 +1,6 @@
 ﻿using GDNTRDSolution_API.Common;
 using GDNTRDSolution_API.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using SoftEngine.Interface.ITRD;
 using SoftEngine.TRDModels.Models.TRD;
@@ -18,6 +19,7 @@ namespace GDNTRDSolution_API.Areas.TRD.Controllers
         }
 
         #region Designations CRUD
+        [Authorize]
         [HttpGet]
         [Route("GetDesignationsList")]
         public IActionResult GetDesignationsList(int pageNumber = 1, int limit = 10)
@@ -42,6 +44,7 @@ namespace GDNTRDSolution_API.Areas.TRD.Controllers
             return Ok(new { IsSuccess = response.IsSuccess, Message = response.Message, resultData = result });
         }
 
+        [Authorize]
         [HttpGet]
         [Route("GetDesignationsById")]
         public IActionResult GetDesignationsById(int id)
@@ -51,7 +54,7 @@ namespace GDNTRDSolution_API.Areas.TRD.Controllers
             return Ok(new { IsSuccess = response.IsSuccess, Message = response.Message, resultData = data });
         }
 
-
+        [Authorize]
         [HttpPost]
         [Route("SaveDesignationsInfo")]
         public async Task<IActionResult> SaveDesignationsInfo(Designations model)
@@ -68,6 +71,7 @@ namespace GDNTRDSolution_API.Areas.TRD.Controllers
                 return BadRequest();
         }
 
+        [Authorize]
         [HttpPut]
         [Route("UpdateDesignationsInfo")]
         public async Task<IActionResult> UpdateDesignationsInfo(Designations model)
@@ -83,6 +87,7 @@ namespace GDNTRDSolution_API.Areas.TRD.Controllers
                 return BadRequest();
         }
 
+        [Authorize]
         [HttpDelete]
         [Route("DeleteDesignationsInfo")]
         public async Task<IActionResult> DeleteDesignationsInfo(int id)

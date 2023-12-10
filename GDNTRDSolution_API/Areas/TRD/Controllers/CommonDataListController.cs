@@ -1,5 +1,6 @@
 ﻿using GDNTRDSolution_API.Common;
 using GDNTRDSolution_API.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 
@@ -10,6 +11,7 @@ namespace GDNTRDSolution_API.Areas.TRD.Controllers
     public class CommonDataListController : Controller
     {
         #region 
+        [Authorize]
         [HttpGet]
         [Route("GetIsActiveList")]
         public IActionResult GetIsActiveList(int pageNumber = 1, int limit = 10)
@@ -38,6 +40,7 @@ namespace GDNTRDSolution_API.Areas.TRD.Controllers
 
         #region Country List
 
+        [Authorize]
         [HttpGet]
         [Route("GetCountryList")]
         public IActionResult GetCountryList(int pageNumber = 1, int limit = 10)

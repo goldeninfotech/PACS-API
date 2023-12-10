@@ -1,5 +1,6 @@
 ﻿using GDNTRDSolution_API.Common;
 using GDNTRDSolution_API.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using SoftEngine.Interface.ITRD;
 using SoftEngine.TRDModels.Models.TRD;
@@ -18,6 +19,7 @@ namespace GDNTRDSolution_API.Areas.TRD.Controllers
         }
 
         #region Hospital CRUD
+        [Authorize]
         [HttpGet]
         [Route("GetHospitalList")]
         public IActionResult GetHospitalList(int pageNumber = 1, int limit = 10)
@@ -42,6 +44,7 @@ namespace GDNTRDSolution_API.Areas.TRD.Controllers
             return Ok(new { IsSuccess = response.IsSuccess, Message = response.Message, resultData = result });
         }
 
+        [Authorize]
         [HttpGet]
         [Route("GetHospitalById")]
         public IActionResult GetHospitalById(int id)
@@ -51,7 +54,7 @@ namespace GDNTRDSolution_API.Areas.TRD.Controllers
             return Ok(new { IsSuccess = response.IsSuccess, Message = response.Message, resultData = data });
         }
 
-
+        [Authorize]
         [HttpPost]
         [Route("SaveHospitalInfo")]
         public async Task<IActionResult> SaveHospitalInfo(Hospital model)
@@ -69,6 +72,7 @@ namespace GDNTRDSolution_API.Areas.TRD.Controllers
                 return BadRequest();
         }
 
+        [Authorize]
         [HttpPut]
         [Route("UpdateHospitalInfo")]
         public async Task<IActionResult> UpdateHospitalInfo(Hospital model)
@@ -84,6 +88,7 @@ namespace GDNTRDSolution_API.Areas.TRD.Controllers
                 return BadRequest();
         }
 
+        [Authorize]
         [HttpDelete]
         [Route("DeleteHospitalInfo")]
         public async Task<IActionResult> DeleteHospitalInfo(int id)

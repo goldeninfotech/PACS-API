@@ -1,0 +1,36 @@
+{
+  "runtimeTarget": {
+    "name": ".NETCoreApp,Version=v6.0",
+    "signature": ""
+  },
+  "compilationOptions": {},
+  "targets": {
+    ".NETCoreApp,Version=v6.0": {
+      "SoftEngine.Interface/1.0.0": {
+        "dependencies": {
+          "SoftEngine.TRDModels": "1.0.0"
+        },
+        "runtime": {
+          "SoftEngine.Interface.dll": {}
+        }
+      },
+      "SoftEngine.TRDModels/1.0.0": {
+        "runtime": {
+          "SoftEngine.TRDModels.dll": {}
+        }
+      }
+    }
+  },
+  "libraries": {
+    "SoftEngine.Interface/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "SoftEngine.TRDModels/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    }
+  }
+}

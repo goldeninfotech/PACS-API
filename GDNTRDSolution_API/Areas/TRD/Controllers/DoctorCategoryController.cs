@@ -1,5 +1,6 @@
 ﻿using GDNTRDSolution_API.Common;
 using GDNTRDSolution_API.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using SoftEngine.Interface.ITRD;
 using SoftEngine.TRDModels.Models.TRD;
@@ -17,6 +18,7 @@ namespace GDNTRDSolution_API.Areas.TRD.Controllers
             _doctorCategory = doctorCategory;
         }
         #region Doctor Category 
+        [Authorize]
         [HttpGet]
         [Route("GetDoctorCategoryList")]
         public IActionResult GetDoctorCategoryList(int pageNumber = 1, int limit = 10)
@@ -41,6 +43,7 @@ namespace GDNTRDSolution_API.Areas.TRD.Controllers
             return Ok(new { IsSuccess = response.IsSuccess, Message = response.Message, resultData = result });
         }
 
+        [Authorize]
         [HttpGet]
         [Route("GetDoctorCategoryById")]
         public IActionResult GetDoctorCategoryById(int id)
@@ -50,7 +53,7 @@ namespace GDNTRDSolution_API.Areas.TRD.Controllers
             return Ok(new { IsSuccess = response.IsSuccess, Message = response.Message, resultData = data });
         }
 
-
+        [Authorize]
         [HttpPost]
         [Route("SaveDoctorCategoryInfo")]
         public async Task<IActionResult> SaveDoctorCategoryInfo(DoctorCategory model)
@@ -67,6 +70,7 @@ namespace GDNTRDSolution_API.Areas.TRD.Controllers
                 return BadRequest();
         }
 
+        [Authorize]
         [HttpPut]
         [Route("UpdateDepartmentInfo")]
         public async Task<IActionResult> UpdateDepartmentInfo(DoctorCategory model)
@@ -82,6 +86,7 @@ namespace GDNTRDSolution_API.Areas.TRD.Controllers
                 return BadRequest();
         }
 
+        [Authorize]
         [HttpDelete]
         [Route("DeleteDepartmentInfo")]
         public async Task<IActionResult> DeleteDepartmentInfo(int id)

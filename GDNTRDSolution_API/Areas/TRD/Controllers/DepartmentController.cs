@@ -18,6 +18,7 @@ namespace GDNTRDSolution_API.Areas.TRD.Controllers
         }
 
         #region Department CRUD
+        [Authorize]
         [HttpGet]
         [Route("GetDepartmentList")]
         public IActionResult GetDepartmentList(int pageNumber = 1, int limit = 10)
@@ -42,6 +43,7 @@ namespace GDNTRDSolution_API.Areas.TRD.Controllers
             return Ok(new { IsSuccess = response.IsSuccess, Message = response.Message, resultData = result });
         }
 
+        [Authorize]
         [HttpGet]
         [Route("GetDepartmentById")]
         public IActionResult GetDepartmentById(int id)
@@ -51,7 +53,7 @@ namespace GDNTRDSolution_API.Areas.TRD.Controllers
             return Ok(new { IsSuccess = response.IsSuccess, Message = response.Message, resultData = data });
         }
 
-
+        [Authorize]
         [HttpPost]
         [Route("SaveDepartmentInfo")]
         public async Task<IActionResult> SaveDepartmentInfo(Departments model ) 
@@ -68,6 +70,7 @@ namespace GDNTRDSolution_API.Areas.TRD.Controllers
                 return BadRequest();
         }
 
+        [Authorize]
         [HttpPut]
         [Route("UpdateDepartmentInfo")]
         public async Task<IActionResult> UpdateDepartmentInfo(Departments model, int subMenuId, string type)
@@ -83,6 +86,7 @@ namespace GDNTRDSolution_API.Areas.TRD.Controllers
                 return BadRequest();
         }
 
+        [Authorize]
         [HttpDelete]
         [Route("DeleteDepartmentInfo")]
         public async Task<IActionResult> DeleteDepartmentInfo(int id)
