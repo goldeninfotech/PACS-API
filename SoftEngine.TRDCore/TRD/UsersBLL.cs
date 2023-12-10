@@ -51,8 +51,8 @@ namespace SoftEngine.TRDCore.TRD
                 {
                     StringBuilder strSql = new StringBuilder();
                     strSql.AppendLine(" INSERT INTO  [User]");
-                    strSql.AppendLine(" ( Full_Name,UserName,Password,Gender,DOB,Country,City,Full_Address,Phone,Role_id,UserType,Status,AddedBy,AddedDate) VALUES ");
-                    strSql.AppendLine(" ( @Full_Name,@UserName,@Password,@Gender,@DOB,@Country,@City,@Full_Address,@Phone,@Role_id,@UserType,@Status,@AddedBy,@AddedDate);");
+                    strSql.AppendLine(" ( Full_Name,UserName,Password,Gender,DOB,Country,City,Full_Address,Phone,Email,Role_id,UserType,Status,AddedBy,AddedDate) VALUES ");
+                    strSql.AppendLine(" ( @Full_Name,@UserName,@Password,@Gender,@DOB,@Country,@City,@Full_Address,@Phone,@Email,@Role_id,@UserType,@Status,@AddedBy,@AddedDate);");
                     try
                     {
                         var Saveresult = connection.Execute(strSql.ToString(),
@@ -67,6 +67,7 @@ namespace SoftEngine.TRDCore.TRD
                                             City = model.City,
                                             Full_Address = model.Full_Address,
                                             Phone = model.Phone,
+                                            Email = model.Email,
                                             Role_id = model.Role_id,
                                             UserType = model.UserType, 
                                             Status = model.Status,
@@ -106,7 +107,7 @@ namespace SoftEngine.TRDCore.TRD
                     StringBuilder strSql = new StringBuilder();
                     strSql.AppendLine(" UPDATE  [User] SET ");
                     strSql.AppendLine(" Full_Name=@Full_Name,Gender=@Gender,DOB=@DOB,Country=@Country,City=@City,Full_Address=@Full_Address," +
-                        " Phone=@Phone,Role_id=@Role_id,UserType=@UserType,Status=@Status, UpdatedBy=@UpdatedBy,UpdatedDate=@UpdatedDate ");
+                        " Phone=@Phone,Email=@Email,Role_id=@Role_id,UserType=@UserType,Status=@Status, UpdatedBy=@UpdatedBy,UpdatedDate=@UpdatedDate ");
                     strSql.AppendLine(" Where Id=@Id;");
                     try
                     {
@@ -121,6 +122,7 @@ namespace SoftEngine.TRDCore.TRD
                                             City = model.City,
                                             Full_Address = model.Full_Address,
                                             Phone = model.Phone,
+                                            Email = model.Email,
                                             Role_id = model.Role_id,
                                             UserType = model.UserType,
                                             Status = model.Status,

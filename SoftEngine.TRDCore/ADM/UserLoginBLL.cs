@@ -60,13 +60,13 @@ namespace SoftEngine.TRDCore.ADM
                     StringBuilder strSql = new StringBuilder();
                     strSql.AppendLine(" UPDATE  [User] SET ");
                     strSql.AppendLine(" PasswordRecCode=@PasswordRecCode, PasswordRecStatus=@PasswordRecStatus ");
-                    strSql.AppendLine(" Where EmpCode=EmpCode and Email=@Email;");
+                    strSql.AppendLine(" Where Id=@Id and Email=@Email;");
                     try
                     {
                         var Saveresult = connection.Execute(strSql.ToString(),
                         new
                         {
-                            EmpCode = obj2.Id,
+                            Id = obj2.Id, 
                             Email = email,
                             PasswordRecCode = recNumber,
                             PasswordRecStatus = false
@@ -154,7 +154,7 @@ namespace SoftEngine.TRDCore.ADM
                         var Saveresult = connection.Execute(strSql.ToString(),
                         new
                         {
-                            EmpCode = obj2.Id,
+                            Id = obj2.Id,
                             Password = newPassword,
                             PasswordRecCode = recCode,
                             PasswordRecStatus = true,
