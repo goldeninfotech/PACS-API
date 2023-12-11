@@ -7,6 +7,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="PACS\**" />
+    <Content Remove="PACS\**" />
+    <EmbeddedResource Remove="PACS\**" />
+    <None Remove="PACS\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Dapper" Version="2.1.24" />
     <PackageReference Include="MailKit" Version="4.3.0" />
     <PackageReference Include="Microsoft.AspNet.WebApi" Version="5.3.0" />
@@ -27,6 +34,7 @@
     <Folder Include="Areas\TRD\Data\" />
     <Folder Include="Areas\TRD\Models\" />
     <Folder Include="Areas\TRD\Views\" />
+    <Folder Include="wwwroot\" />
   </ItemGroup>
 
   <ItemGroup>

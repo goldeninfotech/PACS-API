@@ -95,6 +95,7 @@ builder.Services.AddScoped<IHospitalCategory, HospitalCategoryBLL>();
 builder.Services.AddScoped<IDoctorCategory, DoctorCategoryBLL>();
 builder.Services.AddScoped<IDoctor, DoctorBLL>();
 builder.Services.AddScoped<IDesignations, DesignationsBLL>();
+builder.Services.AddScoped<IFileUpload, FileUploadBLL>();
 
 var app = builder.Build();
 
@@ -108,7 +109,7 @@ app.UseSwagger();
 app.UseSwaggerUI();
 app.UseCors("CrosPolicy");
 
-app.UseHttpsRedirection();
+//app.UseHttpsRedirection();
 app.UseRouting();
 app.UseAuthentication();
 app.UseAuthorization();
