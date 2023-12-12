@@ -21,7 +21,7 @@ namespace SoftEngine.TRDCore.ADM
         }
         public ADM_UserLogin UserLoginAsync(string username, string password)
         {
-            string command = @"Select u.Id,u.Full_Name,u.UserName,d.Id DoctorId ,d.DoctorName,d.BMDC_No,h.Id HospitalId,h.Name HospitalName from [User] u
+            string command = @"Select u.Id,u.Full_Name,u.UserName,u.Email,u.Phone,d.Id DoctorId ,d.DoctorName,d.BMDC_No,h.Id HospitalId,h.Name HospitalName from [User] u
             left join Doctor d on d.User_Id =u.id 
             left join Hospital h on h.User_Id=u.Id
             where u.UserName='" + username + "' and u.Password='" + password + "'";

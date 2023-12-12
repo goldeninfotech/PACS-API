@@ -103,5 +103,16 @@ namespace GDNTRDSolution_API.Areas.TRD.Controllers
         }
         #endregion
 
+
+        #region Access Desktop Hospital 
+        [HttpPost]
+        [Route("GetHospitalByUserId")]
+        public IActionResult GetHospitalByUserId(string id)
+        {
+            var data = _hospital.GetHospitalByUserId(Convert.ToInt32(id));
+            var response = ReturnData.ReturnDataListById(data);
+            return Ok(new { IsSuccess = response.IsSuccess, Message = response.Message, resultData = data });
+        }
+        #endregion
     }
 }

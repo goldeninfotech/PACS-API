@@ -39,7 +39,7 @@ namespace GDNTRDSolution_API.Controllers
             ADM_UserLogin userList = _userLogin.UserLoginAsync(_obj.UserName, _obj.Password);
             if (userList != null)
             {
-                obj = new ADM_UserLogin { Full_Name = userList.Full_Name, Id = userList.Id, DoctorId = userList.DoctorId, DoctorName = userList.DoctorName, BMDC_No = userList.BMDC_No, HospitalId=userList.HospitalId,HospitalName=userList.HospitalName };
+                obj = new ADM_UserLogin { Full_Name = userList.Full_Name, Id = userList.Id, UserName = userList.UserName, Email = userList.Email, Phone = userList.Phone, DoctorId = userList.DoctorId, DoctorName = userList.DoctorName, BMDC_No = userList.BMDC_No, HospitalId=userList.HospitalId,HospitalName=userList.HospitalName };
             }
             return obj;
         }
@@ -48,12 +48,17 @@ namespace GDNTRDSolution_API.Controllers
         {
             var securitykey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_config["Jwt:Key"]));
             var credentials = new SigningCredentials(securitykey, SecurityAlgorithms.HmacSha256);
-
+            if (string.IsNullOrEmpty(aDM_UserLogin.Phone))
+                aDM_UserLogin.Phone = ""; 
+            if (string.IsNullOrEmpty(aDM_UserLogin.Email))
+                aDM_UserLogin.Email = "";
             var claims = new[]
             {
                 new Claim("Full_Name", aDM_UserLogin.Full_Name),
+                new Claim("UserName", aDM_UserLogin.UserName),
                 new Claim("Id", aDM_UserLogin.Id.ToString()),
-                //new Claim("DoctorId", aDM_UserLogin.DoctorId.ToString()),
+                new Claim("Phone", aDM_UserLogin.Phone.ToString()),
+                new Claim("Email", aDM_UserLogin.Email.ToString()),
                 //new Claim("DoctorName", aDM_UserLogin.DoctorName),
                 //new Claim("BMDC_No", aDM_UserLogin.BMDC_No),
                 //new Claim("HospitalId", aDM_UserLogin.HospitalId.ToString()),

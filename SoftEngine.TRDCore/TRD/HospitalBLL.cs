@@ -266,6 +266,19 @@ namespace SoftEngine.TRDCore.TRD
                     return false;
             }
         }
+
         #endregion
+        public Hospital GetHospitalByUserId(int id)
+        {
+            using (var connection = new SqlConnection(_dbSettings.DefaultConnection))
+            {
+                StringBuilder strSql = new StringBuilder();
+                strSql.AppendLine(" Select Id,User_Id,Name,Description,Email,HospitalCategory_Id,Country,City,Full_Address,Phone,Status from Hospital where Status=1 ");
+                strSql.AppendLine(" and User_Id=@User_Id ");
+                var models = connection.Query<Hospital>(strSql.ToString(), new { User_Id = id, }).FirstOrDefault(); 
+                return models;
+            }
+        }
+
     }
 }
