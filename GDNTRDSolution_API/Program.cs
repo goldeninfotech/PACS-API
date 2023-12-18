@@ -96,6 +96,7 @@ builder.Services.AddScoped<IDoctorCategory, DoctorCategoryBLL>();
 builder.Services.AddScoped<IDoctor, DoctorBLL>();
 builder.Services.AddScoped<IDesignations, DesignationsBLL>();
 builder.Services.AddScoped<IFileUpload, FileUploadBLL>();
+builder.Services.AddScoped<IFilesRecored, FilesRecoredBLL>();
 
 var app = builder.Build();
 

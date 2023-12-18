@@ -24,6 +24,9 @@ namespace GDNTRDSolution_API.Areas.TRD.Controllers
            // string dir_path = Path.Combine(wwwrootPath, "PACS");
             HttpContext context = HttpContext;
 
+            string hospitalid = context.Request.Query["hospitalid"];
+            string userId = context.Request.Query["userId"];
+
             string modality = context.Request.Query["modality"];
             string study_instance_id = context.Request.Query["study_instance_id"];
             string series_instance_id = context.Request.Query["series_instance_id"];
@@ -55,19 +58,39 @@ namespace GDNTRDSolution_API.Areas.TRD.Controllers
                         FilesRecord obj = new FilesRecord();
                         postedFile.CopyTo(stream);
 
-                        //obj.Hospital_Id = 2;
-                        obj.ModalityType_Id = modality;
-                        obj.Patient_Id = patientid;
-                        obj.PatientName = patient_name;
-                        obj.SeriesInstance_id = series_instance_id;
-                        obj.StudyInstance_Id = study_instance_id;
-                        obj.SopInstance_Id = sop_instance_id;
-                        obj.SeriesNumber = series_number;
-                        obj.InstanceNumber = instance_number;
-                        obj.Status = 1;
-                        obj.AddedBy = "Roy";
-                        obj.AddedDate = DateTime.Now.ToString();
-                        var data =  _fileUpload.SaveFilesInfo(obj);
+                        if (!string.IsNullOrEmpty(hospitalid) && !string.IsNullOrEmpty(userId))
+                        {
+                            obj.Hospital_Id = Convert.ToInt32(hospitalid);
+                            obj.ModalityType_Id = modality;
+                            obj.Patient_Id = patientid;
+                            obj.PatientName = patient_name;
+                            obj.SeriesInstance_id = series_instance_id;
+                            obj.StudyInstance_Id = study_instance_id;
+                            obj.SopInstance_Id = sop_instance_id;
+                            obj.SeriesNumber = series_number;
+                            obj.InstanceNumber = instance_number;
+                            obj.Status = 1;
+                            obj.AddedBy = userId;
+                            obj.AddedDate = DateTime.Now.ToString();
+                            var data = _fileUpload.SaveFilesInfo(obj);
+                        }
+                        else
+                        {
+                            //obj.Hospital_Id = 2;
+                            obj.ModalityType_Id = modality;
+                            obj.Patient_Id = patientid;
+                            obj.PatientName = patient_name;
+                            obj.SeriesInstance_id = series_instance_id;
+                            obj.StudyInstance_Id = study_instance_id;
+                            obj.SopInstance_Id = sop_instance_id;
+                            obj.SeriesNumber = series_number;
+                            obj.InstanceNumber = instance_number;
+                            obj.Status = 1;
+                            //obj.AddedBy = "";
+                            obj.AddedDate = DateTime.Now.ToString();
+                            var data = _fileUpload.SaveFilesInfo(obj);
+                        }
+
 
 
                     }
