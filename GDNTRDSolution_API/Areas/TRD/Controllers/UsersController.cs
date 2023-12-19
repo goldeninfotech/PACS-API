@@ -22,9 +22,9 @@ namespace GDNTRDSolution_API.Areas.TRD.Controllers
         [Authorize]
         [HttpGet]
         [Route("GetUsersList")]
-        public IActionResult GetUsersList(int pageNumber = 1, int limit = 10)
+        public IActionResult GetUsersList(int pageNumber = 1, int limit = 10, string? search="")
         {
-            var data = _users.GetUsersList();
+            var data = _users.GetUsersList(search);
             IEnumerable<User> paginatedData;
             if (limit == 0)
                 paginatedData = data.Skip(pageNumber - 1);

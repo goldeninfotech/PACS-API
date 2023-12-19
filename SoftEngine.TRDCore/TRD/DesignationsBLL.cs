@@ -19,11 +19,13 @@ namespace SoftEngine.TRDCore.TRD
         {
             _dbSettings = dbSettings;
         }
-        public IEnumerable<Designations> GetDesignationsList()
+        public IEnumerable<Designations> GetDesignationsList(string Name)
         {
             using (var connection = new SqlConnection(_dbSettings.DefaultConnection))
             {
                 var sql = @"Select Id,Name,Status from Designations where Status=1";
+                if (!string.IsNullOrEmpty(Name))
+                    sql += " and Name= '" + Name + "' ";
                 var models = connection.Query<Designations>(sql).ToList();
                 return models;
             }

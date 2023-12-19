@@ -21,9 +21,9 @@ namespace GDNTRDSolution_API.Areas.TRD.Controllers
         [Authorize]
         [HttpGet]
         [Route("GetDepartmentList")]
-        public IActionResult GetDepartmentList(int pageNumber = 1, int limit = 10)
+        public IActionResult GetDepartmentList(int pageNumber = 1, int limit = 10, string? search = "")
         {
-            var data = _department.GetDepartmentList();
+            var data = _department.GetDepartmentList(search); 
             IEnumerable<Departments> paginatedData;
             if (limit == 0)
                 paginatedData = data.Skip(pageNumber - 1);

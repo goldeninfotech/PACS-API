@@ -19,11 +19,17 @@ namespace SoftEngine.TRDCore.TRD
         {
             _dbSettings = dbSettings; 
         }
-        public IEnumerable<User> GetUsersList()
+        public IEnumerable<User> GetUsersList( string search)
         {
             using (var connection = new SqlConnection(_dbSettings.DefaultConnection))
             {
-                var sql = @" Select Id,Full_Name,Gender,DOB,Country,City,Full_Address,Phone,Role_id,UserType,Status from [User] where Status=1";
+                var sql = @" Select u.Id ,u.Full_Name ,u.Gender ,u.DOB ,u.Country ,u.City ,u.Full_Address ,u.Phone ,
+                u.Role_id ,u.UserType ,u.Status, r.Name RoleName
+                from [User] u
+                left join Roles r on r.Id=u.Role_id
+                where u.Status=1 ";
+                if (!string.IsNullOrEmpty(search))
+                    sql += " and ( Full_Name='"+search+"' or City='"+search+"' ) ";
                 var models = connection.Query<User>(sql).ToList();
                 return models;
             }

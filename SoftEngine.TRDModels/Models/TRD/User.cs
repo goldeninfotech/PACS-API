@@ -28,5 +28,6 @@ namespace SoftEngine.TRDModels.Models.TRD
         public string? AddedBy { get; set; }
         public string? UpdatedDate { get; set; }
         public string? UpdatedBy { get; set; }
+        public string? RoleName { get; set; }
     }
 }

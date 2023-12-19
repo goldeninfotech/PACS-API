@@ -21,11 +21,13 @@ namespace SoftEngine.TRDCore.TRD
         }
 
         #region RoleInfo CRUD
-        public IEnumerable<Roles> GetRolesList()
+        public IEnumerable<Roles> GetRolesList(string search)
         {
             using (var connection = new SqlConnection(_dbSettings.DefaultConnection))
             {
                 var sql = @"Select Id,Name,Description,Status from Roles where Status=1";
+                if (!string.IsNullOrEmpty(search))
+                    sql += " and Name= '" + search + "'";
                 var models = connection.Query<Roles>(sql).ToList();
                 return models;
             }

@@ -21,12 +21,17 @@ namespace SoftEngine.TRDCore.TRD
         }
 
         #region Doctor CRUD
-        public IEnumerable<Doctor> GetDoctorList()
+        public IEnumerable<Doctor> GetDoctorList( string search )
         {
             using (var connection = new SqlConnection(_dbSettings.DefaultConnection))
             {
-                var sql = @"Select  Id,User_Id,DoctorName,BMDC_No,Email,Gender,DOB,Hospital_Id,Department_Id,Designation_Id,Category_Id,Degree,Country,City,Full_Address,
-                Immergency_Contact,Image,Status from Doctor where Status=1";
+                var sql = @"Select d.Id,d.User_Id,d.DoctorName,d.BMDC_No,d.Email,d.Gender,d.DOB,d.Hospital_Id,d.Department_Id,d.Designation_Id,
+                d.Category_Id,d.Degree,d.Country,d.City,d.Full_Address,d.Immergency_Contact,d.Status from Doctor d
+                left join Hospital h on h.Id=d.Hospital_Id
+                where d.Status=1 ";
+                if (!string.IsNullOrEmpty(search) )
+                    sql += " and ( d.DoctorName='"+search+"' or d.BMDC_No='"+search+"' or d.City='"+search+"' or h.Name='"+search+"') ";
+                
                 var models = connection.Query<Doctor>(sql).ToList();
                 return models;
             }

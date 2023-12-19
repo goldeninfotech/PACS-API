@@ -10,7 +10,7 @@ namespace SoftEngine.Interface.ITRD
 {
     public interface IDoctorCategory
     {
-        public IEnumerable<DoctorCategory> GetDoctorCategoryList();
+        public IEnumerable<DoctorCategory> GetDoctorCategoryList(string Name);
         public DoctorCategory GetDoctorCategoryById(int id);
         public Task<DataBaseResponse> SaveDoctorCategoryInfo(DoctorCategory model);
         public Task<DataBaseResponse> UpdateDoctorCategoryInfo(DoctorCategory model);

@@ -21,11 +21,13 @@ namespace SoftEngine.TRDCore.TRD
         }
 
         #region Department CRUD 
-        public IEnumerable<Departments> GetDepartmentList()
+        public IEnumerable<Departments> GetDepartmentList(string Name)
         {
             using (var connection = new SqlConnection(_dbSettings.DefaultConnection))
             {
                 var sql = @"Select Id,Name,Status from Departments where Status=1";
+                if (!string.IsNullOrEmpty(Name))
+                    sql += " and Name= '" + Name + "' ";
                 var models = connection.Query<Departments>(sql).ToList();
                 return models;
             }

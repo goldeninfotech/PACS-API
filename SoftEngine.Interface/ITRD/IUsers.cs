@@ -10,7 +10,7 @@ namespace SoftEngine.Interface.ITRD
 {
     public interface IUsers
     {
-        public IEnumerable<User> GetUsersList();
+        public IEnumerable<User> GetUsersList(string search);
         public User GetUsersById(int id);
         public Task<DataBaseResponse> SaveUsersInfo(User model);
         public Task<DataBaseResponse> UpdateUsersInfo(User model);

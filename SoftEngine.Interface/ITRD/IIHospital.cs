@@ -10,7 +10,7 @@ namespace SoftEngine.Interface.ITRD
 {
     public interface IHospital
     {
-        public IEnumerable<Hospital> GetHospitalList();
+        public IEnumerable<Hospital> GetHospitalList(string search);
         public Hospital GetHospitalById(int id);
         public Task<DataBaseResponse> SaveHospitalInfo(Hospital model);
         public Task<DataBaseResponse> UpdateHospitalInfo(Hospital model);

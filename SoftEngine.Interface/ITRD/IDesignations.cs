@@ -10,7 +10,7 @@ namespace SoftEngine.Interface.ITRD
 {
     public interface IDesignations
     {
-        public IEnumerable<Designations> GetDesignationsList();
+        public IEnumerable<Designations> GetDesignationsList(string Name);
         public Designations GetDesignationsById(int id);
         public Task<DataBaseResponse> SaveDesignationsInfo(Designations model);
         public Task<DataBaseResponse> UpdateDesignationsInfo(Designations model);

@@ -19,11 +19,14 @@ namespace SoftEngine.TRDCore.TRD
         {
             _dbSettings = dbSettings;
         }
-        public IEnumerable<HospitalCategory> GetHospitalCategoryList()
+        public IEnumerable<HospitalCategory> GetHospitalCategoryList(string search)
         {
             using (var connection = new SqlConnection(_dbSettings.DefaultConnection))
             {
                 var sql = @"Select Id,Name,Description,Status from HospitalCategory where Status=1";
+                if (!string.IsNullOrEmpty(search)) 
+                    sql += " and Name= '" + search + "'";
+                        
                 var models = connection.Query<HospitalCategory>(sql).ToList();
                 return models;
             }

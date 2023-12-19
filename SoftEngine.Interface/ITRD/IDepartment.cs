@@ -10,7 +10,7 @@ namespace SoftEngine.Interface.ITRD
 {
     public interface IDepartment
     {
-        public IEnumerable<Departments> GetDepartmentList();
+        public IEnumerable<Departments> GetDepartmentList(string Name);
         public Departments GetDepartmentById(int id);
         public Task<DataBaseResponse> SaveDepartmentInfo(Departments model);
         public Task<DataBaseResponse> UpdateDepartmentInfo(Departments model);

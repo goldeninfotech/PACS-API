@@ -21,9 +21,9 @@ namespace GDNTRDSolution_API.Areas.TRD.Controllers
         [Authorize]
         [HttpGet]
         [Route("GetRolesInfoList")]
-        public IActionResult GetRolesInfoList(int pageNumber = 1, int limit = 10)
+        public IActionResult GetRolesInfoList(int pageNumber = 1, int limit = 10, string? search="")
         {
-            var data = _roleInfo.GetRolesList(); 
+            var data = _roleInfo.GetRolesList(search);
             IEnumerable<Roles> paginatedData;  
             if (limit == 0)
                 paginatedData = data.Skip(pageNumber - 1);

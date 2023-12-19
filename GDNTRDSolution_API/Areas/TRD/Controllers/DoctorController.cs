@@ -20,9 +20,9 @@ namespace GDNTRDSolution_API.Areas.TRD.Controllers
         [Authorize]
         [HttpGet]
         [Route("GetDoctorList")]
-        public IActionResult GetDoctorList(int pageNumber = 1, int limit = 10)
+        public IActionResult GetDoctorList(int pageNumber = 1, int limit = 10, string? search ="")
         {
-            var data = _doctor.GetDoctorList();
+            var data = _doctor.GetDoctorList(search); 
             IEnumerable<Doctor> paginatedData;
             if (limit == 0)
                 paginatedData = data.Skip(pageNumber - 1);

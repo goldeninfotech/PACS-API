@@ -20,11 +20,13 @@ namespace SoftEngine.TRDCore.TRD
             _dbSettings = dbSettings;
         }
         #region Hospital CRUD
-        public IEnumerable<Hospital> GetHospitalList()
+        public IEnumerable<Hospital> GetHospitalList(string search)
         {
             using (var connection = new SqlConnection(_dbSettings.DefaultConnection))
             {
                 var sql = @"Select Id,User_Id,Name,Description,Email,HospitalCategory_Id,Country,City,Full_Address,Phone,Status from Hospital where Status=1";
+                if (!string.IsNullOrEmpty(search))
+                    sql += " and ( Name='"+search+"' or City='"+search+ "' or Phone='" + search+"' )";
                 var models = connection.Query<Hospital>(sql).ToList();
                 return models;
             }
