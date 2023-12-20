@@ -100,6 +100,7 @@ builder.Services.AddScoped<IFilesRecored, FilesRecoredBLL>();
 builder.Services.AddScoped<IHospitalDevice, HospitalDeviceBLL>();
 builder.Services.AddScoped<IDeviceType, DeviceTypeBLL>();
 builder.Services.AddScoped<IReportTemplate, ReportTemplateBLL>();
+builder.Services.AddScoped<IDoctorAssign, DoctorAssignBLL>();
 
 var app = builder.Build();
 
