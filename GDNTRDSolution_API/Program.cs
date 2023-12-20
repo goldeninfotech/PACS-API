@@ -97,6 +97,8 @@ builder.Services.AddScoped<IDoctor, DoctorBLL>();
 builder.Services.AddScoped<IDesignations, DesignationsBLL>();
 builder.Services.AddScoped<IFileUpload, FileUploadBLL>();
 builder.Services.AddScoped<IFilesRecored, FilesRecoredBLL>();
+builder.Services.AddScoped<IHospitalDevice, HospitalDeviceBLL>();
+builder.Services.AddScoped<IDeviceType, DeviceTypeBLL>();
 
 var app = builder.Build();
 
