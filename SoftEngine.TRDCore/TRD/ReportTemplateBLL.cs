@@ -12,57 +12,57 @@ using System.Threading.Tasks;
 
 namespace SoftEngine.TRDCore.TRD
 {
-    public class DeviceTypeBLL : IDeviceType
+    public class ReportTemplateBLL : IReportTemplate
     {
         private readonly ConnectionStrings _dbSettings;
-        public DeviceTypeBLL(ConnectionStrings dbSettings)
+        public ReportTemplateBLL(ConnectionStrings dbSettings)
         {
             _dbSettings = dbSettings;
         }
 
-        #region Device Type CRUD
-        public IEnumerable<DeviceType> GetDeviceTypeList(string search)
+        #region ReportTamplate CRUD
+
+        public IEnumerable<ReportTemplate> GetReportTemplateList(string search)
         {
             using (var connection = new SqlConnection(_dbSettings.DefaultConnection))
             {
-                var sql = @"Select Id,DeviceName,Status from DeviceType where Status=1";
+                var sql = @"Select Id,Value,Status from ReportTemplate where Status=1";
 
                 if (!string.IsNullOrEmpty(search))
-                    sql += " and ( DeviceName= '" + search + "' ) ";
-                var models = connection.Query<DeviceType>(sql).ToList();
+                    sql += " and ( Value= '" + search + "' ) ";
+                var models = connection.Query<ReportTemplate>(sql).ToList();
                 return models;
             }
         }
-        public DeviceType GetDeviceTypeById(int id)
+        public ReportTemplate GetReportTemplateById(int id)
         {
             using (var connection = new SqlConnection(_dbSettings.DefaultConnection))
             {
                 StringBuilder strSql = new StringBuilder();
-                strSql.AppendLine(" Select Id,DeviceName,Status from DeviceType where Status=1 ");
+                strSql.AppendLine(" Select Id,Value,Status from ReportTemplate where Status=1 ");
                 strSql.AppendLine(" and Id=@Id ");
-                var models = connection.Query<DeviceType>(strSql.ToString(), new { Id = id, }).FirstOrDefault();
-                return models; 
+                var models = connection.Query<ReportTemplate>(strSql.ToString(), new { Id = id, }).FirstOrDefault();
+                return models;
             }
         }
-
-        public async Task<DataBaseResponse> SaveDeviceTypeInfo(DeviceType model)  
+        public async Task<DataBaseResponse> SaveReportTemplateInfo(ReportTemplate model)
         {
             var response = new DataBaseResponse();
             await using (var connection = new SqlConnection(_dbSettings.DefaultConnection))
             {
-                bool duplicateresult = GetDuplicateDeviceType(model.DeviceName, 0);
+                bool duplicateresult = GetDuplicateReportTemplate(model.Value, 0);
                 if (duplicateresult)
                 {
                     StringBuilder strSql = new StringBuilder();
-                    strSql.AppendLine(" INSERT INTO  DeviceType");
-                    strSql.AppendLine(" ( DeviceName,Status,AddedBy,AddedDate) VALUES ");
-                    strSql.AppendLine(" ( @DeviceName,@Status,@AddedBy,@AddedDate);");
+                    strSql.AppendLine(" INSERT INTO  ReportTemplate ");
+                    strSql.AppendLine(" ( Value,Status,AddedBy,AddedDate) VALUES ");
+                    strSql.AppendLine(" ( @Value,@Status,@AddedBy,@AddedDate) ");
                     try
                     {
                         var Saveresult = connection.Execute(strSql.ToString(),
                                         new
                                         {
-                                            DeviceName = model.DeviceName,
+                                            Value = model.Value,
                                             Status = model.Status,
                                             AddedBy = model.AddedBy,
                                             AddedDate = model.AddedDate,
@@ -89,17 +89,17 @@ namespace SoftEngine.TRDCore.TRD
             return response;
         }
 
-        public async Task<DataBaseResponse> UpdateDeviceTypeInfo(DeviceType model)
+        public async Task<DataBaseResponse> UpdateReportTemplateInfo(ReportTemplate model)
         {
             var response = new DataBaseResponse();
             await using (var connection = new SqlConnection(_dbSettings.DefaultConnection))
             {
-                bool duplicateresult = GetDuplicateDeviceType(model.DeviceName, model.Id);
+                bool duplicateresult = GetDuplicateReportTemplate(model.Value, model.Id);
                 if (duplicateresult)
                 {
                     StringBuilder strSql = new StringBuilder();
-                    strSql.AppendLine(" UPDATE  DeviceType SET ");
-                    strSql.AppendLine(" DeviceName=@DeviceName,Status=@Status, UpdatedBy=@UpdatedBy,UpdatedDate=@UpdatedDate ");
+                    strSql.AppendLine(" UPDATE  ReportTemplate SET ");
+                    strSql.AppendLine(" Value=@Value,Status=@Status, UpdatedBy=@UpdatedBy,UpdatedDate=@UpdatedDate ");
                     strSql.AppendLine(" Where Id=@Id;");
                     try
                     {
@@ -107,7 +107,7 @@ namespace SoftEngine.TRDCore.TRD
                                         new
                                         {
                                             Id = model.Id,
-                                            DeviceName = model.DeviceName,
+                                            Value = model.Value,
                                             Status = model.Status,
                                             UpdatedBy = model.UpdatedBy,
                                             UpdatedDate = model.UpdatedDate
@@ -133,13 +133,13 @@ namespace SoftEngine.TRDCore.TRD
             }
             return response;
         }
-        public async Task<DataBaseResponse> DeleteDeviceTypeInfo(int id)
+        public async Task<DataBaseResponse> DeleteReportTemplateInfo(int id)
         {
             var response = new DataBaseResponse();
             await using (var connection = new SqlConnection(_dbSettings.DefaultConnection))
             {
                 StringBuilder strSql = new StringBuilder();
-                strSql.AppendLine(" UPDATE DeviceType SET Status=@Status WHERE Id=@Id");
+                strSql.AppendLine(" UPDATE ReportTemplate SET Status=@Status WHERE Id=@Id");
                 try
                 {
                     var result = connection.Execute(strSql.ToString(), new { Status = 0, Id = id, });
@@ -156,18 +156,17 @@ namespace SoftEngine.TRDCore.TRD
             }
             return response;
         }
-
-        public bool GetDuplicateDeviceType(string name, int id) 
+        public bool GetDuplicateReportTemplate(string name, int id)
         {
             using (var connection = new SqlConnection(_dbSettings.DefaultConnection))
             {
-                var sql = @" Select Id,DeviceName,Status from DeviceType where Status=1  ";
+                var sql = @" Select Id,Value,Status from ReportTemplate where Status=1  ";
                 if (!string.IsNullOrEmpty(name))
-                    sql += @" and REPLACE(LOWER(DeviceName), ' ', '') =REPLACE('" + name + @"', ' ', '') ";
+                    sql += @" and REPLACE(LOWER(Value), ' ', '') =REPLACE('" + name + @"', ' ', '') ";
                 if (id > 0)
                     sql += @" and Id!=" + id + " ";
 
-                var models = connection.Query<DeviceType>(sql);
+                var models = connection.Query<ReportTemplate>(sql);
                 if (models.Count() == 0)
                     return true;
                 else
@@ -176,5 +175,6 @@ namespace SoftEngine.TRDCore.TRD
         }
 
         #endregion
+
     }
 }

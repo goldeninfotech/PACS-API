@@ -164,7 +164,7 @@ namespace SoftEngine.TRDCore.TRD
                 if (id > 0)
                     sql += @" and Id!=" + id + " ";
 
-                var models = connection.Query<Departments>(sql);
+                var models = connection.Query<DoctorCategory>(sql);
                 if (models.Count() == 0)
                     return true;
                 else

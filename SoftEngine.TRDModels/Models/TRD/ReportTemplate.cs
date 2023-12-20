@@ -10,7 +10,7 @@ namespace SoftEngine.TRDModels.Models.TRD
     {
         public int Id { get; set; }
         public string? Value { get; set; }
-        public string? Status { get; set; }
+        public int Status { get; set; }
         public string? AddedDate { get; set; }
         public string? AddedBy { get; set; }
         public string? UpdatedDate { get; set; }

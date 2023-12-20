@@ -179,7 +179,7 @@ namespace SoftEngine.TRDCore.TRD
                 if (DeviceTypeId > 0)
                     sql += @" and DeviceTypeId!=" + DeviceTypeId + " ";
 
-                var models = connection.Query<Departments>(sql);
+                var models = connection.Query<HospitalDevices>(sql);
                 if (models.Count() == 0)
                     return true;
                 else
