@@ -73,7 +73,7 @@ namespace GDNTRDSolution_API.Areas.TRD.Controllers
         [Authorize]
         [HttpPut]
         [Route("UpdateDepartmentInfo")]
-        public async Task<IActionResult> UpdateDepartmentInfo(Departments model, int subMenuId, string type)
+        public async Task<IActionResult> UpdateDepartmentInfo(Departments model)
         {
             if (model.Id > 0)
             {
