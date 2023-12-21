@@ -31,7 +31,7 @@ namespace SoftEngine.TRDCore.TRD
                 left join Hospital h on h.Id=dp.Hospital_Id
                 where dp.Status=1 ";
                 if (!string.IsNullOrEmpty(search))
-                    sql += " and Name= '" + search + "' ";
+                    sql += " and h.Name= '" + search + "' or  d.DoctorName= '" + search + "' ";
                 var models = connection.Query<DoctorPoolViewModel>(sql).ToList();
                 return models;
             }
