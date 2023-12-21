@@ -103,6 +103,7 @@ builder.Services.AddScoped<IReportTemplate, ReportTemplateBLL>();
 builder.Services.AddScoped<IDoctorAssign, DoctorAssignBLL>();
 builder.Services.AddScoped<IDoctorPool, DoctorPoolBLL>();
 builder.Services.AddScoped<ISettings, SettingsBLL>();
+builder.Services.AddScoped<IDoctorAccount, DoctorAccountBLL>();
 
 var app = builder.Build();
 
