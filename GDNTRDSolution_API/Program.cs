@@ -104,6 +104,7 @@ builder.Services.AddScoped<IDoctorAssign, DoctorAssignBLL>();
 builder.Services.AddScoped<IDoctorPool, DoctorPoolBLL>();
 builder.Services.AddScoped<ISettings, SettingsBLL>();
 builder.Services.AddScoped<IDoctorAccount, DoctorAccountBLL>();
+builder.Services.AddScoped<IBillingSettings, BillingSettingsBLL>();
 
 var app = builder.Build();
 

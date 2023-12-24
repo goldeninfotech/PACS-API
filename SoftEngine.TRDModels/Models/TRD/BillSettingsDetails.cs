@@ -14,7 +14,7 @@ namespace SoftEngine.TRDModels.Models.TRD
         public string? NumOfDevice { get; set; }
         public string? UnitPrice { get; set; }
         public string? RR_CommonAmount { get; set; }
-        public string? Status { get; set; }
+        public int Status { get; set; }
         public string? AddedDate { get; set; }
         public string? AddedBy { get; set; }
         public string? UpdatedDate { get; set; }
