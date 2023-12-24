@@ -19,6 +19,6 @@ namespace SoftEngine.TRDCore
         public static string DATA_NOTFOUND = "Sorry!! Data Not Found...";
         public static string GET_DATA = "Data Get Successfully";
 
-        public static string GET_DUPLICATEDATA = "Already have this name. Please try another.";
+        public static string GET_DUPLICATEDATA = "Already have this. Please try another.";
     }
 }
