@@ -57,5 +57,71 @@ namespace GDNTRDSolution_API.Common
             return state;
         }
         #endregion
+
+
+
+        #region Status List
+        //(status : Pending -1 , Approved-2, Reject-3, Re-submited-4) 
+        public List<CommonDataListModel> StatusList()
+        {
+            List<CommonDataListModel> state = new List<CommonDataListModel>();
+            state.Add(new CommonDataListModel
+            {
+                Id = "Pending",
+                Value = "Pending"
+            });
+            state.Add(new CommonDataListModel
+            {
+                Id = "Approved",
+                Value = "Approved"
+            });
+            state.Add(new CommonDataListModel
+            {
+                Id = "Reject",
+                Value = "Reject"
+            });
+            state.Add(new CommonDataListModel
+            {
+                Id = "Re-submited",
+                Value = "Re-submited"
+            });
+            
+            return state;
+        }
+        #endregion 
+        #region payment method
+        //bkash/cash/bank
+        public List<CommonDataListModel> PaymentMethodList() 
+        {
+            List<CommonDataListModel> state = new List<CommonDataListModel>();
+            state.Add(new CommonDataListModel
+            {
+                Id = "Bkash",
+                Value = "Bkash"
+            });
+            state.Add(new CommonDataListModel
+            {
+                Id = "Cash",
+                Value = "Cash"
+            });
+            state.Add(new CommonDataListModel
+            {
+                Id = "Bank",
+                Value = "Bank"
+            });
+            state.Add(new CommonDataListModel
+            {
+                Id = "Rocket",
+                Value = "Rocket"
+            });
+            state.Add(new CommonDataListModel
+            {
+                Id = "Nagad",
+                Value = "Nagad"
+            });
+            
+            return state;
+        }
+        #endregion
     }
 }
