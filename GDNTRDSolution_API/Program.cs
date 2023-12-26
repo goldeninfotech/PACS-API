@@ -106,6 +106,7 @@ builder.Services.AddScoped<ISettings, SettingsBLL>();
 builder.Services.AddScoped<IDoctorAccount, DoctorAccountBLL>();
 builder.Services.AddScoped<IBillingSettings, BillingSettingsBLL>();
 builder.Services.AddScoped<IInvoice, InvoiceBLL>();
+builder.Services.AddScoped<IInvoicePayments, InvoicePaymentsBLL>();
 
 var app = builder.Build();
 

@@ -12,7 +12,7 @@ namespace SoftEngine.TRDModels.Models.TRD
         public int Inv_Id { get; set; }
         public string? Payment_Mode { get; set; }
         public string? Amount { get; set; }
-        public string? Status { get; set; }
+        public int Status { get; set; }
         public string? AddedDate { get; set; }
         public string? AddedBy { get; set; }
         public string? UpdatedDate { get; set; }
