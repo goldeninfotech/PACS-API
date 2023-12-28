@@ -109,6 +109,7 @@ builder.Services.AddScoped<IInvoice, InvoiceBLL>();
 builder.Services.AddScoped<IInvoicePayments, InvoicePaymentsBLL>();
 builder.Services.AddScoped<IPatientReports, PatientReportsBLL>();
 builder.Services.AddScoped<IReportsDescriptipns, ReportsDescriptipnsBLL>();
+builder.Services.AddScoped<IDoctorSchedule, DoctorScheduleBLL>();
 
 var app = builder.Build();
 
