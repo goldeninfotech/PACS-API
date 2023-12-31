@@ -20,9 +20,9 @@ namespace GDNTRDSolution_API.Areas.TRD.Controllers
         [Authorize]
         [HttpGet]
         [Route("GetDoctorList")]
-        public IActionResult GetDoctorList(int pageNumber = 1, int limit = 10, string? search ="")
+        public IActionResult GetDoctorList(int pageNumber = 1, int limit = 10, string? search ="", string ? statustype="")
         {
-            var data = _doctor.GetDoctorList(search); 
+            var data = _doctor.GetDoctorList(search, statustype); 
             IEnumerable<Doctor> paginatedData;
             if (limit == 0)
                 paginatedData = data.Skip(pageNumber - 1);
@@ -67,7 +67,15 @@ namespace GDNTRDSolution_API.Areas.TRD.Controllers
                 return Ok(data);
             }
             else
-                return BadRequest();
+            {
+                var response = new
+                {
+                    ReturnValue = -1,
+                    Message = " Please Insert The Required Data ",
+                    IsSuccess = false
+                };
+                return Ok(response);
+            }
         }
 
         [Authorize]
@@ -83,7 +91,15 @@ namespace GDNTRDSolution_API.Areas.TRD.Controllers
                 return Ok(data);
             }
             else
-                return BadRequest();
+            {
+                var response = new
+                {
+                    ReturnValue = -1,
+                    Message = " Please Insert The Required Data  ",
+                    IsSuccess = false
+                };
+                return Ok(response);
+            }
         }
 
         [Authorize]
@@ -97,7 +113,109 @@ namespace GDNTRDSolution_API.Areas.TRD.Controllers
                 return Ok(data);
             }
             else
-                return BadRequest();
+            {
+                var response = new
+                {
+                    ReturnValue = -1,
+                    Message = " Please Insert The Required Data ",
+                    IsSuccess = false
+                };
+                return Ok(response);
+            }
+        }
+
+        #endregion
+
+        #region change doctor status
+        [Authorize]
+        [HttpPut]
+        [Route("UpdateDoctorStatusInfo")]
+        public async Task<IActionResult> UpdateDoctorStatusInfo(int status, int id)
+        {
+            if (id > 0 )
+            {
+                Doctor model=new Doctor();
+                model.Status = status;
+                model.Id = id;
+                model.UpdatedDate = DateTime.Now.ToString("dd-mm-yyyy");
+                model.UpdatedBy = "";
+                var data = await _doctor.UpdateDoctorStatusInfo(model);
+                return Ok(data);
+            }
+            else
+            {
+                var response = new
+                {
+                    ReturnValue = -1,
+                    Message = " Please Insert The Required Data",
+                    IsSuccess = false
+                };
+                return Ok(response);
+            }
+        }
+        #endregion
+
+        #region change doctor phone
+        [Authorize]
+        [HttpPut]
+        [Route("UpdateDoctorPhoneInfo")]
+        public async Task<IActionResult> UpdateDoctorPhoneInfo(string phone, int userId)
+        {
+            if (userId > 0 && !string.IsNullOrEmpty(phone))
+            {
+                var data = await _doctor.UpdateDoctorPhoneInfo(phone, userId);
+                return Ok(data);
+            }
+            else
+            {
+                var response = new
+                {
+                    ReturnValue = -1,
+                    Message = " Please Insert The Required Data  ",
+                    IsSuccess = false
+                };
+                return Ok(response);
+            }
+        }
+        #endregion
+
+        #region change doctor password
+        [Authorize]
+        [HttpPut]
+        [Route("UpdateDoctorPasswordInfo")]
+        public async Task<IActionResult> UpdateDoctorPasswordInfo(string password, string confirmPassword, int userId)
+        {
+            if (!string.IsNullOrEmpty(password) && !string.IsNullOrEmpty(confirmPassword))
+            {
+                var password2 = password.Replace(" ", "");
+                var confirmPassword2 = confirmPassword.Replace(" ", "");
+                if (password2.Equals(confirmPassword2, StringComparison.OrdinalIgnoreCase) == true)
+                {
+                    password=ReturnData.GenerateMD5(password);
+                    var data = await _doctor.UpdateDoctorPasswordInfo(password, userId);
+                    return Ok(data);
+                }
+                else
+                {
+                    var response = new
+                    {
+                        ReturnValue = -1,
+                        Message = "Password Not Match",
+                        IsSuccess = false
+                    };
+                    return Ok(response);
+                }
+            }
+            else
+            {
+                var response = new
+                {
+                    ReturnValue = -1,
+                    Message = "Password Not Match",
+                    IsSuccess = false
+                };
+                return Ok(response);
+            }
         }
 
         #endregion

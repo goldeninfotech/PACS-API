@@ -7,6 +7,7 @@ using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Linq;
+using System.Numerics;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -21,14 +22,16 @@ namespace SoftEngine.TRDCore.TRD
         }
 
         #region Doctor CRUD
-        public IEnumerable<Doctor> GetDoctorList( string search )
+        public IEnumerable<Doctor> GetDoctorList( string search, string statustype )
         {
             using (var connection = new SqlConnection(_dbSettings.DefaultConnection))
             {
                 var sql = @"Select d.Id,d.User_Id,d.DoctorName,d.BMDC_No,d.Email,d.Gender,d.DOB,d.Hospital_Id,d.Department_Id,d.Designation_Id,
                 d.Category_Id,d.Degree,d.Country,d.City,d.Full_Address,d.Immergency_Contact,d.Status from Doctor d
                 left join Hospital h on h.Id=d.Hospital_Id
-                where d.Status=1 ";
+                where  1=1 ";
+                if (!string.IsNullOrEmpty(statustype))
+                    sql += " and d.Status= " + statustype + "";
                 if (!string.IsNullOrEmpty(search) )
                     sql += " and ( d.DoctorName='"+search+"' or d.BMDC_No='"+search+"' or d.City='"+search+"' or h.Name='"+search+"') ";
                 
@@ -146,6 +149,7 @@ namespace SoftEngine.TRDCore.TRD
                     strSql.AppendLine(" UPDATE  Doctor SET ");
                     strSql.AppendLine(" DoctorName=@DoctorName,BMDC_No=@BMDC_No,Email=@Email,Gender=@Gender,DOB=@DOB,Hospital_Id=@Hospital_Id, ");
                     strSql.AppendLine(" Department_Id=@Department_Id,Designation_Id=@Designation_Id,Category_Id=@Category_Id,Degree=@Degree,Country=@Country,City=@City,Full_Address=@Full_Address,Immergency_Contact=@Immergency_Contact ");
+                    strSql.AppendLine(" Status=@Status, UpdatedBy=@UpdatedBy,UpdatedDate=@UpdatedDate ");
                     strSql.AppendLine(" Where Id=@Id ");
                     try
                     {
@@ -233,6 +237,154 @@ namespace SoftEngine.TRDCore.TRD
             }
         }
 
+        #endregion
+
+        #region 
+        public bool GetDuplicateDoctorInfo(string Phone, int id)
+        {
+            using (var connection = new SqlConnection(_dbSettings.DefaultConnection))
+            {
+                var sql = @" Select Id,Phone,Status from [User] where Status=1  ";
+                if (!string.IsNullOrEmpty(Phone))
+                    sql += @" and Phone='"+ Phone + "' ";
+                if (id > 0)
+                    sql += @" and Id!=" + id + " ";
+
+                var models = connection.Query<Doctor>(sql);
+                if (models.Count() == 0)
+                    return true;
+                else
+                    return false;
+            }
+        }
+        #endregion
+
+
+        #region Change Doctor Status
+        public async Task<DataBaseResponse> UpdateDoctorStatusInfo(Doctor model)
+        {
+            var response = new DataBaseResponse();
+            await using (var connection = new SqlConnection(_dbSettings.DefaultConnection))
+            {
+                bool duplicateresult = GetDuplicateDoctor(model.DoctorName, model.Id);
+                if (duplicateresult)
+                {
+                    StringBuilder strSql = new StringBuilder();
+                    strSql.AppendLine(" UPDATE  Doctor SET ");
+                    strSql.AppendLine(" Status=@Status, UpdatedBy=@UpdatedBy,UpdatedDate=@UpdatedDate ");
+                    strSql.AppendLine(" Where Id=@Id ");
+                    try
+                    {
+                        var Saveresult = connection.Execute(strSql.ToString(),
+                                        new
+                                        {
+                                            Id = model.Id,
+                                            Status = model.Status,
+                                            UpdatedBy = model.UpdatedBy,
+                                            UpdatedDate = model.UpdatedDate
+                                        }
+                                        );
+                        response.ReturnValue = Saveresult;
+                        response.Message = GlobalConst.UPDATE_SUCCESS_MESSAGE;
+                        response.IsSuccess = true;
+                    }
+                    catch (Exception exp)
+                    {
+                        response.ReturnValue = -1;
+                        response.Message = exp.Message;
+                        response.IsSuccess = false;
+                    }
+                }
+                else
+                {
+                    response.ReturnValue = -1;
+                    response.Message = GlobalConst.GET_DUPLICATEDATA;
+                    response.IsSuccess = false;
+                }
+            }
+            return response;
+        }
+        #endregion
+
+        #region Change Doctor Phone
+        public async Task<DataBaseResponse> UpdateDoctorPhoneInfo(string phone, int userid)
+        {
+            var response = new DataBaseResponse();
+            await using (var connection = new SqlConnection(_dbSettings.DefaultConnection))
+            {
+                bool duplicateresult = GetDuplicateDoctorInfo( phone, userid);
+                if (duplicateresult)
+                {
+                    StringBuilder strSql = new StringBuilder();
+                    strSql.AppendLine(" UPDATE  [User] SET ");
+                    strSql.AppendLine(" Phone=@Phone,UpdatedDate=@UpdatedDate ");
+                    strSql.AppendLine(" Where Id=@Id ");
+                    try
+                    {
+                        var Saveresult = connection.Execute(strSql.ToString(),
+                                        new
+                                        {
+                                            Id = userid,
+                                            Status = phone,
+                                            UpdatedDate = DateTime.Now,
+                                        }
+                                        );
+                        response.ReturnValue = Saveresult;
+                        response.Message = GlobalConst.UPDATE_SUCCESS_MESSAGE;
+                        response.IsSuccess = true;
+                    }
+                    catch (Exception exp)
+                    {
+                        response.ReturnValue = -1;
+                        response.Message = exp.Message;
+                        response.IsSuccess = false;
+                    }
+                }
+                else
+                {
+                    response.ReturnValue = -1;
+                    response.Message = GlobalConst.GET_DUPLICATEDATA;
+                    response.IsSuccess = false;
+                }
+            }
+            return response;
+        }
+        #endregion
+
+
+        #region Change Doctor Password
+        public async Task<DataBaseResponse> UpdateDoctorPasswordInfo(string password, int userid)
+        {
+            var response = new DataBaseResponse();
+            await using (var connection = new SqlConnection(_dbSettings.DefaultConnection))
+            {
+                StringBuilder strSql = new StringBuilder();
+                strSql.AppendLine(" UPDATE  [User] SET ");
+                strSql.AppendLine(" Password=@Password,UpdatedDate=@UpdatedDate ");
+                strSql.AppendLine(" Where Id=@Id ");
+                try
+                {
+                    var Saveresult = connection.Execute(strSql.ToString(),
+                                    new
+                                    {
+                                        Id = userid,
+                                        Password = password,
+                                        UpdatedDate = DateTime.Now,
+                                    }
+                                    );
+                    response.ReturnValue = Saveresult;
+                    response.Message = GlobalConst.UPDATE_SUCCESS_MESSAGE;
+                    response.IsSuccess = true;
+                }
+                catch (Exception exp)
+                {
+                    response.ReturnValue = -1;
+                    response.Message = exp.Message;
+                    response.IsSuccess = false;
+                }
+            }
+            return response;
+        }
         #endregion
     }
 }

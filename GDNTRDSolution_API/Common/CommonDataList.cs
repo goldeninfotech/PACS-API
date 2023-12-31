@@ -58,7 +58,30 @@ namespace GDNTRDSolution_API.Common
         }
         #endregion
 
+        #region Status List For Hospital/Doctor
+        //(status : Pending -1 , Approved-2, Reject-3, Re-submited-4) 
+        public List<CommonDataListModel> StatusListNum()
+        {
+            List<CommonDataListModel> state = new List<CommonDataListModel>();
+            state.Add(new CommonDataListModel
+            {
+                Id = "InActive",
+                Value = "0"
+            });
+            state.Add(new CommonDataListModel
+            {
+                Id = "Active",
+                Value = "1"
+            });
+            state.Add(new CommonDataListModel
+            {
+                Id = "Block",
+                Value = "2"
+            });
 
+            return state;
+        }
+        #endregion 
 
         #region Status List
         //(status : Pending -1 , Approved-2, Reject-3, Re-submited-4) 

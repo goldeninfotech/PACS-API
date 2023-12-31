@@ -38,6 +38,34 @@ namespace GDNTRDSolution_API.Areas.TRD.Controllers
         }
         #endregion
 
+        #region GetIsActive List 
+        [Authorize]
+        [HttpGet]
+        [Route("GetIsActiveListNum")]
+        public IActionResult GetIsActiveListNum(int pageNumber = 1, int limit = 10)
+        {
+            CommonDataList datalist = new CommonDataList();
+            var data = datalist.StatusListNum();
+            IEnumerable<CommonDataListModel> paginatedData;
+            if (limit == 0)
+                paginatedData = data.Skip(pageNumber - 1);
+            else
+                paginatedData = data.Skip((pageNumber - 1) * limit).Take(limit);
+
+            var response = ReturnData.ReturnDataList(data);
+            var result = new ListMetaData<CommonDataListModel>
+            {
+                TotalData = data.Count(),
+                DataFound = paginatedData.Count(),
+                CurrentPage = pageNumber,
+                TotalPages = (int)Math.Ceiling((double)data.Count() / limit),
+                DataLimit = limit,
+                Data = paginatedData
+            };
+            return Ok(new { IsSuccess = response.IsSuccess, Message = response.Message, resultData = result });
+        }
+        #endregion
+
         #region Country List
         [Authorize]
         [HttpGet]
