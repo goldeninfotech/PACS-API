@@ -16,5 +16,8 @@ namespace SoftEngine.Interface.ITRD
         public Task<DataBaseResponse> UpdateHospitalInfo(Hospital model);
         public Task<DataBaseResponse> DeleteHospitalInfo(int id); 
         public Hospital GetHospitalByUserId(int id);
+        public Task<DataBaseResponse> UpdateHospitalStatusInfo(Hospital model);
+        public Task<DataBaseResponse> UpdateHospitalPhoneInfo(string phone, int userId);
+        public Task<DataBaseResponse> UpdateHospitalPasswordInfo(string password, int userid);
     }
 }

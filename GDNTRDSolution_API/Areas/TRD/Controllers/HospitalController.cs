@@ -114,5 +114,101 @@ namespace GDNTRDSolution_API.Areas.TRD.Controllers
             return Ok(new { IsSuccess = response.IsSuccess, Message = response.Message, resultData = data });
         }
         #endregion
+
+
+        #region change Hospital status
+        [Authorize]
+        [HttpPut]
+        [Route("UpdateHospitalStatusInfo")]
+        public async Task<IActionResult> UpdateHospitalStatusInfo(int status, int id)
+        {
+            if (id > 0)
+            {
+                Hospital model = new Hospital();
+                model.Status = status;
+                model.Id = id;
+                model.UpdatedDate = DateTime.Now.ToString("dd-mm-yyyy");
+                model.UpdatedBy = "";
+                var data = await _hospital.UpdateHospitalStatusInfo(model);
+                return Ok(data);
+            }
+            else
+            {
+                var response = new
+                {
+                    ReturnValue = -1,
+                    Message = " Please Insert The Required Data",
+                    IsSuccess = false
+                };
+                return Ok(response);
+            }
+        }
+        #endregion
+
+        #region change Hospital phone
+        [Authorize]
+        [HttpPut]
+        [Route("UpdateHospitalPhoneInfo")]
+        public async Task<IActionResult> UpdateHospitalPhoneInfo(string phone, int userId)
+        {
+            if (userId > 0 && !string.IsNullOrEmpty(phone))
+            {
+                var data = await _hospital.UpdateHospitalPhoneInfo(phone, userId);
+                return Ok(data);
+            }
+            else
+            {
+                var response = new
+                {
+                    ReturnValue = -1,
+                    Message = " Please Insert The Required Data  ",
+                    IsSuccess = false
+                };
+                return Ok(response);
+            }
+        }
+        #endregion
+
+        #region change Hospital password
+        [Authorize]
+        [HttpPut]
+        [Route("UpdateHospitalPasswordInfo")]
+        public async Task<IActionResult> UpdateHospitalPasswordInfo(string password, string confirmPassword, int userId)
+        {
+            if (!string.IsNullOrEmpty(password) && !string.IsNullOrEmpty(confirmPassword))
+            {
+                var password2 = password.Replace(" ", "");
+                var confirmPassword2 = confirmPassword.Replace(" ", "");
+                if (password2.Equals(confirmPassword2, StringComparison.OrdinalIgnoreCase) == true)
+                {
+                    password = ReturnData.GenerateMD5(password);
+                    var data = await _hospital.UpdateHospitalPasswordInfo(password, userId);
+                    return Ok(data);
+                }
+                else
+                {
+                    var response = new
+                    {
+                        ReturnValue = -1,
+                        Message = "Password Not Match",
+                        IsSuccess = false
+                    };
+                    return Ok(response);
+                }
+            }
+            else
+            {
+                var response = new
+                {
+                    ReturnValue = -1,
+                    Message = "Password Not Match",
+                    IsSuccess = false
+                };
+                return Ok(response);
+            }
+        }
+
+        #endregion
+
     }
 }

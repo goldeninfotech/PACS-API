@@ -282,5 +282,146 @@ namespace SoftEngine.TRDCore.TRD
             }
         }
 
+
+        #region Update Hospital Status Info
+        public async Task<DataBaseResponse> UpdateHospitalStatusInfo(Hospital model)
+        {
+            var response = new DataBaseResponse();
+            await using (var connection = new SqlConnection(_dbSettings.DefaultConnection))
+            {
+                StringBuilder strSql = new StringBuilder();
+                strSql.AppendLine(" UPDATE  Hospital SET ");
+                strSql.AppendLine(" Status=@Status, UpdatedBy=@UpdatedBy,UpdatedDate=@UpdatedDate Where Id=@Id ");
+                try
+                {
+                    var Saveresult = connection.Execute(strSql.ToString(),
+                                    new
+                                    {
+                                        Id = model.Id,
+                                        Status = model.Status,
+                                        UpdatedBy = model.UpdatedBy,
+                                        UpdatedDate = model.UpdatedDate
+                                    }
+                                    );
+                    response.ReturnValue = Saveresult;
+                    response.Message = GlobalConst.UPDATE_SUCCESS_MESSAGE;
+                    response.IsSuccess = true;
+                }
+                catch (Exception exp)
+                {
+                    response.ReturnValue = -1;
+                    response.Message = exp.Message;
+                    response.IsSuccess = false;
+                }
+            }
+            return response;
+        }
+
+
+
+        #endregion
+
+        #region Duplicate Hospital Info
+        public bool GetDuplicateHospitalInfo(string Phone, int id)
+        {
+            using (var connection = new SqlConnection(_dbSettings.DefaultConnection))
+            {
+                var sql = @" Select Id,Phone,Status from [User] where Status=1  ";
+                if (!string.IsNullOrEmpty(Phone))
+                    sql += @" and Phone='" + Phone + "' ";
+                if (id > 0)
+                    sql += @" and Id!=" + id + " ";
+
+                var models = connection.Query<Doctor>(sql);
+                if (models.Count() == 0)
+                    return true;
+                else
+                    return false;
+            }
+        }
+        #endregion
+
+        #region Update Hospital Phone Info
+        public async Task<DataBaseResponse> UpdateHospitalPhoneInfo(string phone, int userid) 
+        {
+            var response = new DataBaseResponse();
+            await using (var connection = new SqlConnection(_dbSettings.DefaultConnection))
+            {
+                bool duplicateresult = GetDuplicateHospitalInfo(phone, userid);
+                if (duplicateresult)
+                {
+                    StringBuilder strSql = new StringBuilder();
+                    strSql.AppendLine(" UPDATE  [User] SET ");
+                    strSql.AppendLine(" Phone=@Phone,UpdatedDate=@UpdatedDate ");
+                    strSql.AppendLine(" Where Id=@Id ");
+                    try
+                    {
+                        var Saveresult = connection.Execute(strSql.ToString(),
+                                        new
+                                        {
+                                            Id = userid,
+                                            Status = phone,
+                                            UpdatedDate = DateTime.Now,
+                                        }
+                                        );
+                        response.ReturnValue = Saveresult;
+                        response.Message = GlobalConst.UPDATE_SUCCESS_MESSAGE;
+                        response.IsSuccess = true;
+                    }
+                    catch (Exception exp)
+                    {
+                        response.ReturnValue = -1;
+                        response.Message = exp.Message;
+                        response.IsSuccess = false;
+                    }
+                }
+                else
+                {
+                    response.ReturnValue = -1;
+                    response.Message = GlobalConst.GET_DUPLICATEDATA;
+                    response.IsSuccess = false;
+                }
+            }
+            return response;
+        }
+
+
+        #endregion
+
+        #region Update Hospital Password Info
+        public async Task<DataBaseResponse> UpdateHospitalPasswordInfo(string password, int userid)
+        {
+            var response = new DataBaseResponse();
+            await using (var connection = new SqlConnection(_dbSettings.DefaultConnection))
+            {
+                StringBuilder strSql = new StringBuilder();
+                strSql.AppendLine(" UPDATE  [User] SET ");
+                strSql.AppendLine(" Password=@Password,UpdatedDate=@UpdatedDate ");
+                strSql.AppendLine(" Where Id=@Id ");
+                try
+                {
+                    var Saveresult = connection.Execute(strSql.ToString(),
+                                    new
+                                    {
+                                        Id = userid,
+                                        Password = password,
+                                        UpdatedDate = DateTime.Now,
+                                    }
+                                    );
+                    response.ReturnValue = Saveresult;
+                    response.Message = GlobalConst.UPDATE_SUCCESS_MESSAGE;
+                    response.IsSuccess = true;
+                }
+                catch (Exception exp)
+                {
+                    response.ReturnValue = -1;
+                    response.Message = exp.Message;
+                    response.IsSuccess = false;
+                }
+            }
+            return response;
+        }
+        #endregion
+
     }
 }

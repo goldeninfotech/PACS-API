@@ -239,7 +239,7 @@ namespace SoftEngine.TRDCore.TRD
 
         #endregion
 
-        #region 
+        #region DuplicateDoctorInfo
         public bool GetDuplicateDoctorInfo(string Phone, int id)
         {
             using (var connection = new SqlConnection(_dbSettings.DefaultConnection))
