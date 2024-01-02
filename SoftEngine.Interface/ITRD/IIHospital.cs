@@ -1,5 +1,6 @@
 ﻿using SoftEngine.Interface.Models;
 using SoftEngine.TRDModels.Models.TRD;
+using SoftEngine.TRDModels.ViewModels.ViewADM;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,8 +11,8 @@ namespace SoftEngine.Interface.ITRD
 {
     public interface IHospital
     {
-        public IEnumerable<Hospital> GetHospitalList(string search);
-        public Hospital GetHospitalById(int id);
+        public IEnumerable<HospitalViewModel> GetHospitalList(string search);
+        public HospitalViewModel GetHospitalById(int id);
         public Task<DataBaseResponse> SaveHospitalInfo(Hospital model);
         public Task<DataBaseResponse> UpdateHospitalInfo(Hospital model);
         public Task<DataBaseResponse> DeleteHospitalInfo(int id); 

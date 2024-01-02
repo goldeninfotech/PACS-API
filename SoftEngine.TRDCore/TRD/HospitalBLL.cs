@@ -3,6 +3,7 @@ using SoftEngine.Interface.ITRD;
 using SoftEngine.Interface.Models;
 using SoftEngine.TRDCore.Configurations;
 using SoftEngine.TRDModels.Models.TRD;
+using SoftEngine.TRDModels.ViewModels.ViewADM;
 using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
@@ -20,25 +21,33 @@ namespace SoftEngine.TRDCore.TRD
             _dbSettings = dbSettings;
         }
         #region Hospital CRUD
-        public IEnumerable<Hospital> GetHospitalList(string search)
+        public IEnumerable<HospitalViewModel> GetHospitalList(string search)
         {
             using (var connection = new SqlConnection(_dbSettings.DefaultConnection))
             {
-                var sql = @"Select Id,User_Id,Name,Description,Email,HospitalCategory_Id,Country,City,Full_Address,Phone,Status from Hospital where Status=1";
+                var sql = @"select  h.Id,h.User_Id,h.Name ,h.Description,h.Email,h.HospitalCategory_Id,h.Country,h.City,h.Full_Address,h.Phone,
+                h.Image,h.Status,u.Full_Name,hc.Name HospitalCategoryName
+                from Hospital h
+                left join [User] u on u.Id=h.User_Id
+                left join HospitalCategory hc on hc.Id=h.HospitalCategory_Id where h.Status=1";
                 if (!string.IsNullOrEmpty(search))
-                    sql += " and ( Name='"+search+"' or City='"+search+ "' or Phone='" + search+"' )";
-                var models = connection.Query<Hospital>(sql).ToList();
+                    sql += " and ( h.Name='"+search+"' or h.City='"+search+ "' or h.Phone='" + search+"' )";
+                var models = connection.Query<HospitalViewModel>(sql).ToList();
                 return models;
             }
         }
-        public Hospital GetHospitalById(int id)
+        public HospitalViewModel GetHospitalById(int id)
         {
             using (var connection = new SqlConnection(_dbSettings.DefaultConnection))
             {
                 StringBuilder strSql = new StringBuilder();
-                strSql.AppendLine(" Select Id,User_Id,Name,Description,Email,HospitalCategory_Id,Country,City,Full_Address,Phone,Image,Status from Hospital where Status=1 ");
-                strSql.AppendLine(" and Id=@Id ");
-                var models = connection.Query<Hospital>(strSql.ToString(), new { Id = id, }).FirstOrDefault();
+                strSql.AppendLine(@" select  h.Id,h.User_Id,h.Name HospitalName,h.Description,h.Email,h.HospitalCategory_Id,h.Country,h.City,h.Full_Address,h.Phone,
+                h.Image,h.Status,u.Full_Name,hc.Name HospitalCategoryName
+                from Hospital h
+                left join [User] u on u.Id=h.User_Id
+                left join HospitalCategory hc on hc.Id=h.HospitalCategory_Id where h.Status=1 ");
+                strSql.AppendLine(" and h.Id=@Id ");
+                var models = connection.Query<HospitalViewModel>(strSql.ToString(), new { Id = id, }).FirstOrDefault();
                 return models; 
             }
         }

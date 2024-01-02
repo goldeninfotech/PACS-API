@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using SoftEngine.Interface.ITRD;
 using SoftEngine.Interface.Models;
 using SoftEngine.TRDModels.Models.TRD;
+using SoftEngine.TRDModels.ViewModels.ViewADM;
 
 namespace GDNTRDSolution_API.Areas.TRD.Controllers
 {
@@ -28,14 +29,14 @@ namespace GDNTRDSolution_API.Areas.TRD.Controllers
         public IActionResult GetDoctorList(int pageNumber = 1, int limit = 10, string? search ="", string ? statustype="")
         {
             var data = _doctor.GetDoctorList(search, statustype); 
-            IEnumerable<Doctor> paginatedData;
+            IEnumerable<DoctorViewModel> paginatedData;
             if (limit == 0)
                 paginatedData = data.Skip(pageNumber - 1);
             else
                 paginatedData = data.Skip((pageNumber - 1) * limit).Take(limit);
 
             var response = ReturnData.ReturnDataList(data);
-            var result = new ListMetaData<Doctor>
+            var result = new ListMetaData<DoctorViewModel>
             {
                 TotalData = data.Count(),
                 DataFound = paginatedData.Count(),
@@ -227,7 +228,7 @@ namespace GDNTRDSolution_API.Areas.TRD.Controllers
 
 
         #region Doctor Image Upload 
-        //[Authorize]
+        [Authorize]
         [HttpPost]
         [Route("UploadDoctorImageAsync")]
         public async Task<IActionResult> UploadDoctorImageAsync([FromForm] Images images)
@@ -266,7 +267,7 @@ namespace GDNTRDSolution_API.Areas.TRD.Controllers
         #endregion
 
         #region Get Image File
-
+        [Authorize]
         [HttpGet("GetImageById")]
         public IActionResult GetImageById(int userid, string imageType)
         {

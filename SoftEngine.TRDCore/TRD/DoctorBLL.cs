@@ -3,6 +3,7 @@ using SoftEngine.Interface.ITRD;
 using SoftEngine.Interface.Models;
 using SoftEngine.TRDCore.Configurations;
 using SoftEngine.TRDModels.Models.TRD;
+using SoftEngine.TRDModels.ViewModels.ViewADM;
 using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
@@ -22,31 +23,45 @@ namespace SoftEngine.TRDCore.TRD
         }
 
         #region Doctor CRUD
-        public IEnumerable<Doctor> GetDoctorList( string search, string statustype )
+        public IEnumerable<DoctorViewModel> GetDoctorList( string search, string statustype )
         {
             using (var connection = new SqlConnection(_dbSettings.DefaultConnection))
             {
-                var sql = @"Select d.Id,d.User_Id,d.DoctorName,d.BMDC_No,d.Email,d.Gender,d.DOB,d.Hospital_Id,d.Department_Id,d.Designation_Id,
-                d.Category_Id,d.Degree,d.Country,d.City,d.Full_Address,d.Immergency_Contact,d.Status from Doctor d
+                var sql = @"Select d.Id,d.User_Id,d.DoctorName,d.BMDC_No,d.Email,d.Gender,d.DOB,d.Hospital_Id,d.Department_Id,d.Designation_Id,d.Category_Id,d.Degree,d.Country,d.
+                City,d.Full_Address,d.Immergency_Contact,d.Status,u.Full_Name,h.Name HodpitalName, 
+                dep.Name DepartmentName,desi.Name DesignationName,dc.Name DoctorCategoryName
+                from Doctor d 
+                left join [User] u on u.Id=d.User_Id
                 left join Hospital h on h.Id=d.Hospital_Id
+                left join Departments dep on dep.Id=d.Department_Id
+                left join Designations desi on desi.Id=d.Designation_Id
+                left join DoctorCategory dc on dc.Id=d.Category_Id
                 where  1=1 ";
                 if (!string.IsNullOrEmpty(statustype))
                     sql += " and d.Status= " + statustype + "";
                 if (!string.IsNullOrEmpty(search) )
                     sql += " and ( d.DoctorName='"+search+"' or d.BMDC_No='"+search+"' or d.City='"+search+"' or h.Name='"+search+"') ";
                 
-                var models = connection.Query<Doctor>(sql).ToList();
+                var models = connection.Query<DoctorViewModel>(sql).ToList();
                 return models;
             }
         }
-        public Doctor GetDoctorById(int id)
+        public DoctorViewModel GetDoctorById(int id)
         {
             using (var connection = new SqlConnection(_dbSettings.DefaultConnection))
             {
                 StringBuilder strSql = new StringBuilder();
-                strSql.AppendLine(" Select Id,User_Id,DoctorName,BMDC_No,Email,Gender,DOB,Hospital_Id,Department_Id,Designation_Id,Category_Id,Degree,Country,City,Full_Address,Immergency_Contact,Status from Doctor where Status=1 ");
-                strSql.AppendLine(" and Id=@Id ");
-                var models = connection.Query<Doctor>(strSql.ToString(), new { Id = id, }).FirstOrDefault();
+                strSql.AppendLine(@" Select d.Id,d.User_Id,d.DoctorName,d.BMDC_No,d.Email,d.Gender,d.DOB,d.Hospital_Id,d.Department_Id,d.Designation_Id,d.Category_Id,d.Degree,d.Country,d.
+                City,d.Full_Address,d.Immergency_Contact,d.Status,u.Full_Name,h.Name HodpitalName, 
+                dep.Name DepartmentName,desi.Name DesignationName,dc.Name DoctorCategoryName
+                from Doctor d 
+                left join [User] u on u.Id=d.User_Id
+                left join Hospital h on h.Id=d.Hospital_Id
+                left join Departments dep on dep.Id=d.Department_Id
+                left join Designations desi on desi.Id=d.Designation_Id
+                left join DoctorCategory dc on dc.Id=d.Category_Id where d.Status=1 ");
+                strSql.AppendLine(" and d.Id=@Id ");
+                var models = connection.Query<DoctorViewModel>(strSql.ToString(), new { Id = id, }).FirstOrDefault();
                 return models;
             }
         }
