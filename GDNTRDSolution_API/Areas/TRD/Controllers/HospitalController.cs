@@ -1,8 +1,11 @@
 ﻿using GDNTRDSolution_API.Common;
 using GDNTRDSolution_API.Models;
+using GDNTRDSolution_API.Service;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http.Extensions;
 using Microsoft.AspNetCore.Mvc;
 using SoftEngine.Interface.ITRD;
+using SoftEngine.Interface.Models;
 using SoftEngine.TRDModels.Models.TRD;
 
 namespace GDNTRDSolution_API.Areas.TRD.Controllers
@@ -12,10 +15,12 @@ namespace GDNTRDSolution_API.Areas.TRD.Controllers
     public class HospitalController : Controller
     {
         private readonly IHospital _hospital;
+        private readonly IImageUpload _imageUpload;
 
-        public HospitalController(IHospital hospital)
+        public HospitalController(IHospital hospital, IImageUpload imageUpload)
         {
             _hospital = hospital;
+            _imageUpload = imageUpload;
         }
 
         #region Hospital CRUD
@@ -206,6 +211,65 @@ namespace GDNTRDSolution_API.Areas.TRD.Controllers
                 };
                 return Ok(response);
             }
+        }
+
+        #endregion
+
+        #region Hospital Image Upload 
+        //[Authorize]
+        [HttpPost]
+        [Route("UploadHospitalImageAsync")]
+        public async Task<IActionResult> UploadHospitalImageAsync([FromForm] Images images)
+        {
+            DataBaseResponse obj = new DataBaseResponse();
+            if (images == null)
+            {
+                return BadRequest(new { Success = false, ErrorCode = "S01", Error = "Invalid post request" });
+            }
+            if (string.IsNullOrEmpty(Request.GetMultipartBoundary()))
+            {
+                return BadRequest(new { Success = false, ErrorCode = "S02", Error = "Invalid post header" });
+            }
+            var extension = System.IO.Path.GetExtension(images.Image.FileName);
+
+            if (images.Image != null && (extension == ".jpg" || extension == ".JPG" || extension == ".png" || extension == ".PNG"))
+            {
+                ImageFiles imageFiles=new ImageFiles();
+                imageFiles.Id=images.Id;
+                imageFiles.Image=images.Image;
+                imageFiles.User_Id = images.User_Id;
+                imageFiles.ImageFolderType = "Hospital";
+                imageFiles.ImageType = images.ImageType;
+                imageFiles.Status = 1;
+                imageFiles.AddedDate = DateTime.Now.ToString();
+                imageFiles.AddedDate = ""; 
+                imageFiles.UpdatedDate = DateTime.Now.ToString();
+                imageFiles.UpdatedBy = "";
+                obj = await _imageUpload.SaveHospitalImage(imageFiles);
+                return Ok(new { IsSuccess = obj.IsSuccess, Message = obj.Message });
+            }
+
+            return Ok(new { IsSuccess = false, Message = "Please select only .jpg or .png image." });
+        }
+
+
+        [HttpGet("GetImageById")]
+        public IActionResult GetImageById(int userid, string imageType)
+        {
+            List<ImageFiles> data = _imageUpload.GetImageById(userid, imageType);
+            string filepath = "";
+            if (data.Count > 0)
+                filepath = data.FirstOrDefault().ImagePath;
+            var imagePath = Path.Combine(filepath);
+
+            if (System.IO.File.Exists(imagePath))
+            {
+                var imageBytes = System.IO.File.ReadAllBytes(imagePath);
+                return File(imageBytes, "image/jpeg");
+                
+            }
+            else
+                return Ok(new { IsSuccess = false, Message = "File Not Found!!" });
         }
 
         #endregion

@@ -112,6 +112,7 @@ builder.Services.AddScoped<IReportsDescriptipns, ReportsDescriptipnsBLL>();
 builder.Services.AddScoped<IDoctorSchedule, DoctorScheduleBLL>();
 builder.Services.AddScoped<IDoctorPaymentRecored, DoctorPaymentRecoredBLL>();
 builder.Services.AddScoped<IPermission, PermissionBLL>();
+builder.Services.AddScoped<IImageUpload, ImageUploadBLL>();
 
 var app = builder.Build();
 
