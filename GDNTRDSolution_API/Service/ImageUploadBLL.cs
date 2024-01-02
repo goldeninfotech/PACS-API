@@ -19,7 +19,7 @@ namespace GDNTRDSolution_API.Service
             _dbSettings = dbSettings;
             this.environment = environment;
         }
-        public async Task<DataBaseResponse> SaveHospitalImage(ImageFiles imageFiles)
+        public async Task<DataBaseResponse> SaveImage(ImageFiles imageFiles)
         {
             DataBaseResponse obj = new DataBaseResponse();
             DataBaseResponse obj2 = new DataBaseResponse();

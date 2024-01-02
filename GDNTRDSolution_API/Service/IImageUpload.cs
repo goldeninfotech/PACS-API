@@ -6,7 +6,7 @@ namespace GDNTRDSolution_API.Service
 {
     public interface IImageUpload
     {
-        public Task<DataBaseResponse> SaveHospitalImage(ImageFiles imageFiles);
+        public Task<DataBaseResponse> SaveImage(ImageFiles imageFiles);
         public List<ImageFiles> GetImageById(int id, string imageType);
     }
 }

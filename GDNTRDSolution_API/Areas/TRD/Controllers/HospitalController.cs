@@ -245,13 +245,16 @@ namespace GDNTRDSolution_API.Areas.TRD.Controllers
                 imageFiles.AddedDate = ""; 
                 imageFiles.UpdatedDate = DateTime.Now.ToString();
                 imageFiles.UpdatedBy = "";
-                obj = await _imageUpload.SaveHospitalImage(imageFiles);
+                obj = await _imageUpload.SaveImage(imageFiles);
                 return Ok(new { IsSuccess = obj.IsSuccess, Message = obj.Message });
             }
 
             return Ok(new { IsSuccess = false, Message = "Please select only .jpg or .png image." });
         }
 
+        #endregion
+
+        #region Get Image File
 
         [HttpGet("GetImageById")]
         public IActionResult GetImageById(int userid, string imageType)
@@ -266,12 +269,11 @@ namespace GDNTRDSolution_API.Areas.TRD.Controllers
             {
                 var imageBytes = System.IO.File.ReadAllBytes(imagePath);
                 return File(imageBytes, "image/jpeg");
-                
+
             }
             else
                 return Ok(new { IsSuccess = false, Message = "File Not Found!!" });
         }
-
         #endregion
 
     }
