@@ -23,10 +23,12 @@ namespace SoftEngine.TRDCore.TRD
         {
             using (var connection = new SqlConnection(_dbSettings.DefaultConnection))
             {
-                var sql = @"   Select COUNT(f.Id) TotalFiles, f.PatientName,f.ModalityType_Id,f.StudyInstance_Id,f.SeriesInstance_id
-                ,h.Name HospitalName from FilesRecord f
-                left join Hospital h on h.Id=f.Hospital_Id
-                group by f.Patient_Id, f.PatientName ,f.ModalityType_Id,f.StudyInstance_Id,f.SeriesInstance_id, h.Name ";
+                var sql = @"   Select Hospital_Id,PatientName,Patient_Id,StudyInstance_Id,ModalityType_Id,count(InstanceNumber) TotalFiles, FilesRecord.Status,
+                  h.Name HospitalName
+                  from FilesRecord 
+                  left join Hospital h on h.Id=Hospital_Id
+                  where FilesRecord.Status=1
+                  group by StudyInstance_Id,PatientName,Patient_Id,ModalityType_Id,Hospital_Id,FilesRecord.Status, h.Name  ";
                 var models = connection.Query<FilesRecordViewModel>(sql).ToList();
                 return models;
             }
