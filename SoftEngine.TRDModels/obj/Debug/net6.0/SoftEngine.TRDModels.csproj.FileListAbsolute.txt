@@ -9,3 +9,15 @@ D:\Dev Software2\Medical Software\WebAPISoftware\WebAPISoftware\SoftEngine.TRDMo
 D:\Dev Software2\Medical Software\WebAPISoftware\WebAPISoftware\SoftEngine.TRDModels\obj\Debug\net6.0\refint\SoftEngine.TRDModels.dll
 D:\Dev Software2\Medical Software\WebAPISoftware\WebAPISoftware\SoftEngine.TRDModels\obj\Debug\net6.0\SoftEngine.TRDModels.pdb
 D:\Dev Software2\Medical Software\WebAPISoftware\WebAPISoftware\SoftEngine.TRDModels\obj\Debug\net6.0\ref\SoftEngine.TRDModels.dll
+C:\Users\HRIDOY\Downloads\New folder\PACS-API\PACS-API\SoftEngine.TRDModels\bin\Debug\net6.0\SoftEngine.TRDModels.deps.json
+C:\Users\HRIDOY\Downloads\New folder\PACS-API\PACS-API\SoftEngine.TRDModels\bin\Debug\net6.0\SoftEngine.TRDModels.dll
+C:\Users\HRIDOY\Downloads\New folder\PACS-API\PACS-API\SoftEngine.TRDModels\bin\Debug\net6.0\SoftEngine.TRDModels.pdb
+C:\Users\HRIDOY\Downloads\New folder\PACS-API\PACS-API\SoftEngine.TRDModels\obj\Debug\net6.0\SoftEngine.TRDModels.csproj.AssemblyReference.cache
+C:\Users\HRIDOY\Downloads\New folder\PACS-API\PACS-API\SoftEngine.TRDModels\obj\Debug\net6.0\SoftEngine.TRDModels.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\HRIDOY\Downloads\New folder\PACS-API\PACS-API\SoftEngine.TRDModels\obj\Debug\net6.0\SoftEngine.TRDModels.AssemblyInfoInputs.cache
+C:\Users\HRIDOY\Downloads\New folder\PACS-API\PACS-API\SoftEngine.TRDModels\obj\Debug\net6.0\SoftEngine.TRDModels.AssemblyInfo.cs
+C:\Users\HRIDOY\Downloads\New folder\PACS-API\PACS-API\SoftEngine.TRDModels\obj\Debug\net6.0\SoftEngine.TRDModels.csproj.CoreCompileInputs.cache
+C:\Users\HRIDOY\Downloads\New folder\PACS-API\PACS-API\SoftEngine.TRDModels\obj\Debug\net6.0\SoftEngine.TRDModels.dll
+C:\Users\HRIDOY\Downloads\New folder\PACS-API\PACS-API\SoftEngine.TRDModels\obj\Debug\net6.0\refint\SoftEngine.TRDModels.dll
+C:\Users\HRIDOY\Downloads\New folder\PACS-API\PACS-API\SoftEngine.TRDModels\obj\Debug\net6.0\SoftEngine.TRDModels.pdb
+C:\Users\HRIDOY\Downloads\New folder\PACS-API\PACS-API\SoftEngine.TRDModels\obj\Debug\net6.0\ref\SoftEngine.TRDModels.dll

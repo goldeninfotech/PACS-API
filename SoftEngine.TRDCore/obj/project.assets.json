@@ -539,23 +539,23 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\royhr\\.nuget\\packages\\": {},
+    "C:\\Users\\HRIDOY\\.nuget\\packages\\": {},
     "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\Dev Software2\\Medical Software\\WebAPISoftware\\WebAPISoftware\\SoftEngine.TRDCore\\SoftEngine.TRDCore.csproj",
+      "projectUniqueName": "C:\\Users\\HRIDOY\\Downloads\\New folder\\PACS-API\\PACS-API\\SoftEngine.TRDCore\\SoftEngine.TRDCore.csproj",
       "projectName": "SoftEngine.TRDCore",
-      "projectPath": "D:\\Dev Software2\\Medical Software\\WebAPISoftware\\WebAPISoftware\\SoftEngine.TRDCore\\SoftEngine.TRDCore.csproj",
-      "packagesPath": "C:\\Users\\royhr\\.nuget\\packages\\",
-      "outputPath": "D:\\Dev Software2\\Medical Software\\WebAPISoftware\\WebAPISoftware\\SoftEngine.TRDCore\\obj\\",
+      "projectPath": "C:\\Users\\HRIDOY\\Downloads\\New folder\\PACS-API\\PACS-API\\SoftEngine.TRDCore\\SoftEngine.TRDCore.csproj",
+      "packagesPath": "C:\\Users\\HRIDOY\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\HRIDOY\\Downloads\\New folder\\PACS-API\\PACS-API\\SoftEngine.TRDCore\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
       ],
       "configFilePaths": [
-        "C:\\Users\\royhr\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\HRIDOY\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
@@ -571,8 +571,8 @@
         "net6.0": {
           "targetAlias": "net6.0",
           "projectReferences": {
-            "D:\\Dev Software2\\Medical Software\\WebAPISoftware\\WebAPISoftware\\SoftEngine.Interface\\SoftEngine.Interface.csproj": {
-              "projectPath": "D:\\Dev Software2\\Medical Software\\WebAPISoftware\\WebAPISoftware\\SoftEngine.Interface\\SoftEngine.Interface.csproj"
+            "C:\\Users\\HRIDOY\\Downloads\\New folder\\PACS-API\\PACS-API\\SoftEngine.Interface\\SoftEngine.Interface.csproj": {
+              "projectPath": "C:\\Users\\HRIDOY\\Downloads\\New folder\\PACS-API\\PACS-API\\SoftEngine.Interface\\SoftEngine.Interface.csproj"
             }
           }
         }
@@ -612,7 +612,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.400\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.201\\RuntimeIdentifierGraph.json"
       }
     }
   }

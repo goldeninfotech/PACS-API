@@ -74,7 +74,7 @@ namespace GDNTRDSolution_API.Areas.TRD.Controllers
         [Authorize]
         [HttpPut]
         [Route("UpdateDoctorPoolInfo")]
-        public async Task<IActionResult> UpdateDoctorPoolInfo(DoctorPool model, int subMenuId, string type)
+        public async Task<IActionResult> UpdateDoctorPoolInfo(DoctorPool model)
         {
             if (model.Id > 0)
             {

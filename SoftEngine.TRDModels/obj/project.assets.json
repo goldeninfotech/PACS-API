@@ -8,23 +8,23 @@
     "net6.0": []
   },
   "packageFolders": {
-    "C:\\Users\\royhr\\.nuget\\packages\\": {},
+    "C:\\Users\\HRIDOY\\.nuget\\packages\\": {},
     "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\Dev Software2\\Medical Software\\WebAPISoftware\\WebAPISoftware\\SoftEngine.TRDModels\\SoftEngine.TRDModels.csproj",
+      "projectUniqueName": "C:\\Users\\HRIDOY\\Downloads\\New folder\\PACS-API\\PACS-API\\SoftEngine.TRDModels\\SoftEngine.TRDModels.csproj",
       "projectName": "SoftEngine.TRDModels",
-      "projectPath": "D:\\Dev Software2\\Medical Software\\WebAPISoftware\\WebAPISoftware\\SoftEngine.TRDModels\\SoftEngine.TRDModels.csproj",
-      "packagesPath": "C:\\Users\\royhr\\.nuget\\packages\\",
-      "outputPath": "D:\\Dev Software2\\Medical Software\\WebAPISoftware\\WebAPISoftware\\SoftEngine.TRDModels\\obj\\",
+      "projectPath": "C:\\Users\\HRIDOY\\Downloads\\New folder\\PACS-API\\PACS-API\\SoftEngine.TRDModels\\SoftEngine.TRDModels.csproj",
+      "packagesPath": "C:\\Users\\HRIDOY\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\HRIDOY\\Downloads\\New folder\\PACS-API\\PACS-API\\SoftEngine.TRDModels\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
       ],
       "configFilePaths": [
-        "C:\\Users\\royhr\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\HRIDOY\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
@@ -67,7 +67,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.400\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.201\\RuntimeIdentifierGraph.json"
       }
     }
   }

@@ -13,3 +13,18 @@ D:\Dev Software2\Medical Software\WebAPISoftware\WebAPISoftware\SoftEngine.Inter
 D:\Dev Software2\Medical Software\WebAPISoftware\WebAPISoftware\SoftEngine.Interface\bin\Debug\net6.0\SoftEngine.TRDModels.pdb
 D:\Dev Software2\Medical Software\WebAPISoftware\WebAPISoftware\SoftEngine.Interface\obj\Debug\net6.0\SoftEngine.Interface.csproj.AssemblyReference.cache
 D:\Dev Software2\Medical Software\WebAPISoftware\WebAPISoftware\SoftEngine.Interface\obj\Debug\net6.0\SoftEngine.Interface.csproj.CopyComplete
+C:\Users\HRIDOY\Downloads\New folder\PACS-API\PACS-API\SoftEngine.Interface\bin\Debug\net6.0\SoftEngine.Interface.deps.json
+C:\Users\HRIDOY\Downloads\New folder\PACS-API\PACS-API\SoftEngine.Interface\bin\Debug\net6.0\SoftEngine.Interface.dll
+C:\Users\HRIDOY\Downloads\New folder\PACS-API\PACS-API\SoftEngine.Interface\bin\Debug\net6.0\SoftEngine.Interface.pdb
+C:\Users\HRIDOY\Downloads\New folder\PACS-API\PACS-API\SoftEngine.Interface\bin\Debug\net6.0\SoftEngine.TRDModels.dll
+C:\Users\HRIDOY\Downloads\New folder\PACS-API\PACS-API\SoftEngine.Interface\bin\Debug\net6.0\SoftEngine.TRDModels.pdb
+C:\Users\HRIDOY\Downloads\New folder\PACS-API\PACS-API\SoftEngine.Interface\obj\Debug\net6.0\SoftEngine.Interface.csproj.AssemblyReference.cache
+C:\Users\HRIDOY\Downloads\New folder\PACS-API\PACS-API\SoftEngine.Interface\obj\Debug\net6.0\SoftEngine.Interface.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\HRIDOY\Downloads\New folder\PACS-API\PACS-API\SoftEngine.Interface\obj\Debug\net6.0\SoftEngine.Interface.AssemblyInfoInputs.cache
+C:\Users\HRIDOY\Downloads\New folder\PACS-API\PACS-API\SoftEngine.Interface\obj\Debug\net6.0\SoftEngine.Interface.AssemblyInfo.cs
+C:\Users\HRIDOY\Downloads\New folder\PACS-API\PACS-API\SoftEngine.Interface\obj\Debug\net6.0\SoftEngine.Interface.csproj.CoreCompileInputs.cache
+C:\Users\HRIDOY\Downloads\New folder\PACS-API\PACS-API\SoftEngine.Interface\obj\Debug\net6.0\SoftEngine.Interface.csproj.CopyComplete
+C:\Users\HRIDOY\Downloads\New folder\PACS-API\PACS-API\SoftEngine.Interface\obj\Debug\net6.0\SoftEngine.Interface.dll
+C:\Users\HRIDOY\Downloads\New folder\PACS-API\PACS-API\SoftEngine.Interface\obj\Debug\net6.0\refint\SoftEngine.Interface.dll
+C:\Users\HRIDOY\Downloads\New folder\PACS-API\PACS-API\SoftEngine.Interface\obj\Debug\net6.0\SoftEngine.Interface.pdb
+C:\Users\HRIDOY\Downloads\New folder\PACS-API\PACS-API\SoftEngine.Interface\obj\Debug\net6.0\ref\SoftEngine.Interface.dll
